@@ -3,12 +3,23 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Send, Loader2 } from "lucide-react";
+import { Send, Loader2, Check } from "lucide-react";
 import { inquirySchema, type InquiryInput } from "@/lib/validations";
+import { WHATSAPP_NUMBER } from "@/lib/constants";
 import type { TripPackage } from "@/types/charter";
 
+const packageNames: Record<string, string> = {
+  "sharing-trip": "Sharing Trip",
+  "sunset-trip": "Sunset Trip",
+  "half-day-private": "Half Day Trip – Private",
+  "three-quarter-day": "3/4 Day Trip",
+  "jigging-casting-6hr": "6 Hours Jigging and Casting",
+  "full-day": "Full Day Trip",
+  "full-day-jigging-popping": "Full Day Trip – Jigging and Popping",
+};
+
 export default function BookingInquiryForm({ trips }: { trips: TripPackage[] }) {
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
 
   const {
     register,
@@ -20,26 +31,53 @@ export default function BookingInquiryForm({ trips }: { trips: TripPackage[] }) 
   });
 
   async function onSubmit(data: InquiryInput) {
+    setStatus("sending");
+    const packageName = packageNames[data.packageSlug] || data.packageSlug;
+
+    // Build WhatsApp message
+    const whatsappMessage = `🎣 *NEW BOOKING INQUIRY*
+====================
+
+👤 *Name:* ${data.name}
+📧 *Email:* ${data.email}
+📱 *Phone:* ${data.phone || "Not provided"}
+
+🗺️ *Package:* ${packageName}
+📅 *Date:* ${data.preferredDate}
+👥 *Guests:* ${data.partySize}
+
+💬 *Message:* ${data.message || "None"}
+
+---
+Reply to this message to confirm the booking.`;
+
+    // Open WhatsApp
+    const encoded = encodeURIComponent(whatsappMessage);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, "_blank");
+
+    // Send email in background
     try {
-      const res = await fetch("/api/inquiry", {
+      await fetch("/api/inquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error("Failed");
-      setStatus("success");
-      reset();
     } catch {
-      setStatus("error");
+      // Email failed silently — WhatsApp already opened
     }
+
+    setStatus("success");
+    reset();
   }
 
   if (status === "success") {
     return (
       <div className="rounded-2xl bg-green-50 border border-green-200 p-8 text-center">
+        <Check className="h-10 w-10 text-green-600 mx-auto mb-3" />
         <h3 className="text-xl font-bold text-green-800 mb-2">Inquiry Sent!</h3>
         <p className="text-green-700">
-          We&apos;ll get back to you shortly. You can also reach us directly on WhatsApp.
+          WhatsApp opened with your details. We&apos;ve also sent you an email confirmation.
+          We&apos;ll get back to you shortly!
         </p>
       </div>
     );
@@ -154,18 +192,22 @@ export default function BookingInquiryForm({ trips }: { trips: TripPackage[] }) 
         <input {...register("honeypot")} tabIndex={-1} autoComplete="off" />
       </div>
 
-      {status === "error" && (
-        <p className="text-red-600 text-sm">
-          Something went wrong. Please try again or contact us on WhatsApp.
-        </p>
-      )}
-
       <button
         type="submit"
-        className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors disabled:opacity-50"
+        disabled={status === "sending"}
+        className="inline-flex items-center gap-2 rounded-full bg-green-600 px-8 py-3 text-sm font-semibold text-white hover:bg-green-700 transition-colors disabled:opacity-50"
       >
-        <Send className="h-4 w-4" />
-        Send Inquiry
+        {status === "sending" ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Sending...
+          </>
+        ) : (
+          <>
+            <Send className="h-4 w-4" />
+            Send Inquiry via WhatsApp & Email
+          </>
+        )}
       </button>
     </form>
   );

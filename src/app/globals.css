@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@keyframes wave-slow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes wave-medium {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes wave-fast {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@theme {
+  --animate-wave-slow: wave-slow 18s linear infinite;
+  --animate-wave-medium: wave-medium 12s linear infinite;
+  --animate-wave-fast: wave-fast 8s linear infinite;
+}
+
+:root {
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-600: #2563eb;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* Smooth focus rings */
+*:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Date input styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+}

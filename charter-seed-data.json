@@ -1,0 +1,147 @@
+{
+  "_meta": {
+    "sourceListing": "FishingBooker charter #17292 (Serangan, Denpasar, Bali)",
+    "extractedOn": "2026-07-07",
+    "note": "Factual/structural data only. Marketing copy below is original, not copied from the source listing. Verify all fields with the business owner before launch, especially items flagged 'TBD'."
+  },
+  "business": {
+    "name": "Bali Fishing Trips",
+    "brandNameConfirmed": false,
+    "tagline": "Private fishing charters out of Serangan, Bali",
+    "location": {
+      "area": "Serangan",
+      "city": "Denpasar",
+      "region": "Bali",
+      "country": "Indonesia",
+      "exactAddress": "TBD — confirm harbor departure point / map pin with owner"
+    },
+    "ratingSnapshot": {
+      "overall": 4.4,
+      "reviewCount": 126,
+      "boatAndEquipment": 4.2,
+      "captainAndCrew": 4.7,
+      "fishingExperience": 4.4,
+      "breakdown": { "5star": 82, "4star": 23, "3star": 14, "2star": 4, "1star": 1 },
+      "asOf": "2026-07-07"
+    },
+    "contact": {
+      "whatsapp": "TBD",
+      "email": "TBD"
+    }
+  },
+  "boat": {
+    "name": "TBD — confirm with owner",
+    "category": "Yacht / Cruiser",
+    "manufacturer": "GT 70",
+    "lengthFt": 36,
+    "yearBuilt": 2014,
+    "capacityPersons": 8,
+    "engine": "2x Yamaha 115HP",
+    "amenities": ["Private toilet", "Shaded seating", "Trolling outriggers"],
+    "flaggedForVerification": {
+      "maxCruisingSpeedKnots": 4,
+      "note": "Source listing shows 4 knots, implausible for this engine setup — likely a data-entry error on FishingBooker's end. Confirm real figure before publishing."
+    }
+  },
+  "tripPackages": [
+    {
+      "slug": "sharing-trip",
+      "name": "Sharing Trip",
+      "durationHours": 4,
+      "startTime": "07:00",
+      "bookingType": "shared",
+      "maxGuestsIncluded": 2,
+      "priceUsd": 400,
+      "description": "A relaxed half-day out on a shared boat — a good fit if you want to fish without booking the whole vessel."
+    },
+    {
+      "slug": "sunset-trip",
+      "name": "Sunset Trip",
+      "durationHours": 3,
+      "startTime": "14:00",
+      "bookingType": "private",
+      "maxGuestsIncluded": 2,
+      "priceUsd": 540,
+      "description": "A shorter afternoon trip timed to end with the sunset over the water — the whole boat to yourselves."
+    },
+    {
+      "slug": "half-day-private",
+      "name": "Half Day Trip – Private",
+      "durationHours": 4,
+      "startTime": "07:00",
+      "bookingType": "private",
+      "maxGuestsIncluded": 4,
+      "priceUsd": 550,
+      "description": "A private morning charter for up to four anglers, with the full boat and crew focused on your group."
+    },
+    {
+      "slug": "three-quarter-day",
+      "name": "3/4 Day Trip",
+      "durationHours": 6,
+      "startTime": "07:00",
+      "bookingType": "private",
+      "maxGuestsIncluded": 4,
+      "priceUsd": 650,
+      "description": "Extra time on the water for groups who want more than a half day without committing to a full one."
+    },
+    {
+      "slug": "jigging-casting-6hr",
+      "name": "6 Hours Jigging and Casting",
+      "durationHours": 6,
+      "startTime": "08:00",
+      "bookingType": "private",
+      "maxGuestsIncluded": 4,
+      "priceUsd": 650,
+      "description": "A technique-focused trip for anglers who specifically want jigging and casting over trolling."
+    },
+    {
+      "slug": "full-day",
+      "name": "Full Day Trip",
+      "durationHours": 8,
+      "startTime": "07:00",
+      "bookingType": "private",
+      "maxGuestsIncluded": 4,
+      "priceUsd": 750,
+      "description": "The full day out, reaching further offshore grounds with the most time to find fish."
+    },
+    {
+      "slug": "full-day-jigging-popping",
+      "name": "Full Day Trip – Jigging and Popping",
+      "durationHours": 8,
+      "startTime": "07:00",
+      "bookingType": "private",
+      "maxGuestsIncluded": 4,
+      "priceUsd": 800,
+      "description": "A full day built around jigging and popping technique, for anglers targeting a specific style of fishing."
+    }
+  ],
+  "includedAsStandard": [
+    "Fishing license",
+    "Hotel/villa pickup",
+    "Guests keep their catch",
+    "Drinks and snacks",
+    "Meal on longer trips",
+    "Free cancellation up to 30 days before the trip"
+  ],
+  "targetSpecies": ["Mahi Mahi", "Yellowfin Tuna", "Skipjack Tuna", "Red Snapper", "Grouper", "Mackerel"],
+  "techniques": ["Trolling", "Bottom fishing", "Jigging", "Popping", "Casting"],
+  "reviewThemes": {
+    "note": "Aggregate stats only, safe to reuse. Do not scrape or publish individual review text — replace with 3-5 original, owner-permissioned testimonials before launch.",
+    "friendlyCaptainPct": 96,
+    "goodBoatPct": 88,
+    "familyFriendlyPct": 84,
+    "greatExperiencePct": 83,
+    "recommendedPct": 86,
+    "caughtFishPct": 73
+  },
+  "testimonials": [],
+  "contentNeededFromClient": [
+    "Confirmed brand/legal name for the standalone site",
+    "Original photography (boat, crew, catches) — not FishingBooker-hosted images",
+    "WhatsApp number and preferred contact method",
+    "Exact departure address / map pin",
+    "Crew names and bios, if including a 'Meet the Captain' section",
+    "3-5 written testimonials with permission to publish",
+    "Payment details, if Phase 2 deposit payments are added"
+  ]
+}

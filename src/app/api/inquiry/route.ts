@@ -53,7 +53,7 @@ Reply to ${data.email} to respond to this inquiry.`;
 
     const { error } = await resend.emails.send({
       from: "Bali Fishing Trips <info@balifishboat.com>",
-      to: ["dedikbali@yahoo.com"],
+      to: ["info@balifishboat.com"],
       subject: `New Inquiry: ${packageNames[data.packageSlug] || data.packageSlug} — ${data.name}`,
       text,
     });

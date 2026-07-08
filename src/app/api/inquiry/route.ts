@@ -52,8 +52,8 @@ Message: ${data.message || "None"}
 Reply to ${data.email} to respond to this inquiry.`;
 
     const { error } = await resend.emails.send({
-      from: "Bali Fishing Trips <info@balifishboat.com>",
-      to: ["info@balifishboat.com"],
+      from: "Bali Fishing Trips <noreply@balifishboat.com>",
+      to: ["dedikbali@yahoo.com"],
       subject: `New Inquiry: ${packageNames[data.packageSlug] || data.packageSlug} — ${data.name}`,
       text,
     });

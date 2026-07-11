@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "tsx scripts/import-charter-data.ts"
+    "seed": "tsx scripts/import-charter-data.ts",
+    "patch-pricing": "tsx scripts/patch-pricing.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

@@ -75,8 +75,11 @@ async function seed() {
       startTime: trip.startTime,
       bookingType: trip.bookingType,
       maxGuestsIncluded: trip.maxGuestsIncluded,
+      ...(trip.minGuests ? { minGuests: trip.minGuests } : {}),
+      ...(trip.extraGuestPriceUsd ? { extraGuestPriceUsd: trip.extraGuestPriceUsd } : {}),
       priceUsd: trip.priceUsd,
-      includes: data.includedAsStandard,
+      pricingUnit: trip.pricingUnit,
+      includes: trip.includes ?? data.includedAsStandard,
       description: trip.description,
     });
     console.log(`  ✓ ${trip.name}`);

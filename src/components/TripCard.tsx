@@ -43,7 +43,13 @@ export default function TripCard({ trip }: { trip: TripPackage }) {
       <div className="mt-4 pt-4 border-t border-slate-100 flex items-end justify-between">
         <div>
           <span className="text-2xl font-bold text-blue-900">${trip.priceUsd}</span>
-          <span className="text-sm text-slate-500 ml-1">USD</span>
+          <span className="text-sm text-slate-500 ml-1">{trip.pricingUnit === "per person" ? "USD / person" : "USD"}</span>
+          {trip.minGuests && trip.minGuests > 1 && (
+            <p className="text-xs text-slate-400 mt-0.5">Min. {trip.minGuests} guests</p>
+          )}
+          {trip.extraGuestPriceUsd && (
+            <p className="text-xs text-slate-400 mt-0.5">+${trip.extraGuestPriceUsd}/extra guest after {trip.maxGuestsIncluded}</p>
+          )}
         </div>
         <span className="text-sm font-medium text-blue-600 group-hover:underline">
           View details &rarr;

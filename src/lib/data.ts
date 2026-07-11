@@ -9,7 +9,10 @@ const tripPackagesQuery = `*[_type == "tripPackage"] | order(priceUsd asc){
   startTime,
   bookingType,
   maxGuestsIncluded,
+  minGuests,
+  extraGuestPriceUsd,
   priceUsd,
+  pricingUnit,
   includes,
   description
 }`;
@@ -21,7 +24,10 @@ const tripPackageBySlugQuery = `*[_type == "tripPackage" && slug.current == $slu
   startTime,
   bookingType,
   maxGuestsIncluded,
+  minGuests,
+  extraGuestPriceUsd,
   priceUsd,
+  pricingUnit,
   includes,
   description
 }`;

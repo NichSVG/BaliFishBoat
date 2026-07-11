@@ -61,7 +61,7 @@ export const FAQS = [
   {
     question: "Do you offer shared trips?",
     answer:
-      "Yes! Our Sharing Trip is a 4-hour shared boat experience at $400 for up to 2 guests.",
+      "Yes! Our Sharing Trip is a 4-hour shared boat experience at $200 per person. We also offer a Sunset Trip at $270 per person (min. 2 guests, includes BBQ dinner).",
   },
   {
     question: "Where do we depart from?",

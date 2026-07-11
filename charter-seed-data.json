@@ -51,7 +51,8 @@
       "startTime": "07:00",
       "bookingType": "shared",
       "maxGuestsIncluded": 2,
-      "priceUsd": 400,
+      "priceUsd": 200,
+      "pricingUnit": "per person",
       "description": "A relaxed half-day out on a shared boat — a good fit if you want to fish without booking the whole vessel."
     },
     {
@@ -61,8 +62,18 @@
       "startTime": "14:00",
       "bookingType": "private",
       "maxGuestsIncluded": 2,
-      "priceUsd": 540,
-      "description": "A shorter afternoon trip timed to end with the sunset over the water — the whole boat to yourselves."
+      "minGuests": 2,
+      "priceUsd": 270,
+      "pricingUnit": "per person",
+      "includes": [
+        "Fishing license",
+        "Hotel/villa pickup",
+        "Guests keep their catch",
+        "Drinks and snacks",
+        "BBQ dinner",
+        "Free cancellation up to 30 days before the trip"
+      ],
+      "description": "A shorter afternoon trip timed to end with the sunset over the water — the whole boat to yourselves. Includes a BBQ dinner on board."
     },
     {
       "slug": "half-day-private",
@@ -71,7 +82,9 @@
       "startTime": "07:00",
       "bookingType": "private",
       "maxGuestsIncluded": 4,
+      "extraGuestPriceUsd": 50,
       "priceUsd": 550,
+      "pricingUnit": "per boat",
       "description": "A private morning charter for up to four anglers, with the full boat and crew focused on your group."
     },
     {
@@ -81,7 +94,9 @@
       "startTime": "07:00",
       "bookingType": "private",
       "maxGuestsIncluded": 4,
+      "extraGuestPriceUsd": 50,
       "priceUsd": 650,
+      "pricingUnit": "per boat",
       "description": "Extra time on the water for groups who want more than a half day without committing to a full one."
     },
     {
@@ -91,7 +106,9 @@
       "startTime": "08:00",
       "bookingType": "private",
       "maxGuestsIncluded": 4,
+      "extraGuestPriceUsd": 50,
       "priceUsd": 650,
+      "pricingUnit": "per boat",
       "description": "A technique-focused trip for anglers who specifically want jigging and casting over trolling."
     },
     {
@@ -101,7 +118,9 @@
       "startTime": "07:00",
       "bookingType": "private",
       "maxGuestsIncluded": 4,
+      "extraGuestPriceUsd": 50,
       "priceUsd": 750,
+      "pricingUnit": "per boat",
       "description": "The full day out, reaching further offshore grounds with the most time to find fish."
     },
     {
@@ -111,7 +130,9 @@
       "startTime": "07:00",
       "bookingType": "private",
       "maxGuestsIncluded": 4,
+      "extraGuestPriceUsd": 50,
       "priceUsd": 800,
+      "pricingUnit": "per boat",
       "description": "A full day built around jigging and popping technique, for anglers targeting a specific style of fishing."
     }
   ],

@@ -23,7 +23,10 @@ export interface TripPackage {
   startTime: string;
   bookingType: "shared" | "private";
   maxGuestsIncluded: number;
+  minGuests?: number;
+  extraGuestPriceUsd?: number;
   priceUsd: number;
+  pricingUnit: "per boat" | "per person";
   includes: string[];
   description: string;
 }

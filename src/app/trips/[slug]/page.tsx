@@ -85,15 +85,30 @@ export default async function TripDetailPage({
           </div>
           <div className="text-center">
             <Users className="h-6 w-6 text-blue-600 mx-auto mb-1" />
-            <p className="text-lg font-bold text-slate-900">{trip.maxGuestsIncluded}</p>
-            <p className="text-xs text-slate-500">Max Guests</p>
+            <p className="text-lg font-bold text-slate-900">
+              {trip.maxGuestsIncluded}
+              {trip.minGuests && trip.minGuests > 1 && (
+                <span className="text-sm font-normal text-slate-500"> (min. {trip.minGuests})</span>
+              )}
+            </p>
+            <p className="text-xs text-slate-500">
+              {trip.extraGuestPriceUsd ? `Up to 8 guests` : "Max Guests"}
+            </p>
           </div>
           <div className="text-center">
             <DollarSign className="h-6 w-6 text-blue-600 mx-auto mb-1" />
             <p className="text-lg font-bold text-slate-900">${trip.priceUsd}</p>
-            <p className="text-xs text-slate-500">USD per boat</p>
+            <p className="text-xs text-slate-500">USD {trip.pricingUnit}</p>
           </div>
         </div>
+
+        {trip.extraGuestPriceUsd && (
+          <div className="mb-8 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+            <p className="text-sm text-amber-800">
+              <strong>Extra guest charge:</strong> ${trip.extraGuestPriceUsd} per person after {trip.maxGuestsIncluded} guests. Up to 8 guests total.
+            </p>
+          </div>
+        )}
 
         {/* Includes */}
         <div className="mb-8">

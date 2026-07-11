@@ -135,7 +135,7 @@ Reply to this message to confirm the booking.`;
             <option value="">Select a trip</option>
             {trips.map((t) => (
               <option key={t.slug} value={t.slug}>
-                {t.name} — ${t.priceUsd}
+                {t.name} — ${t.priceUsd} {t.pricingUnit === "per person" ? "/person" : ""}{t.extraGuestPriceUsd ? ` (+$${t.extraGuestPriceUsd}/extra)` : ""}
               </option>
             ))}
           </select>

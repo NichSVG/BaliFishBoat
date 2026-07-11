@@ -31,8 +31,8 @@ export default async function TripsPage() {
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold text-slate-900 mb-3">Trip Packages</h1>
         <p className="text-slate-600 max-w-2xl mx-auto">
-          All trips depart from Serangan Harbor, Denpasar. Prices are per boat, not per person.
-          Choose private or shared depending on your group.
+          All trips depart from Serangan Harbor, Denpasar. Private trips are priced per boat; the Sharing Trip and Sunset Trip are priced per person.
+          Private charters include up to 4 guests — additional guests are $50 each.
         </p>
       </div>
       <TripPackageList trips={trips} />

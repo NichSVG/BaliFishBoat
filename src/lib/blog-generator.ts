@@ -43,16 +43,22 @@ AVOID
 - Overpromising ("guaranteed catch," "best fishing in the world")
 - Mirroring competitor phrasing — FishingBooker, Viator, Pulau Private Charters, and various TripAdvisor listings all rank for the same terms; keep this genuinely original
 - Inventing marine biology facts, records, or regulations you're not certain of
-- NEVER use ### (triple hash) for subheadings — use only ## for H2 headings
-- NEVER use *** or --- (horizontal rules / thematic breaks) — they are banned
-- NEVER use bold (**text**) as section headers — use proper ## headings instead
+- NEVER use ### (h3 headings) — use only ## for section headers
+- NEVER use *** or --- (horizontal rules / thematic breaks)
+- NEVER use **bold** markdown — write plain text only, no asterisk-based formatting
+
+INPUTS I'LL PROVIDE PER POST
+- Topic / working title
+- Primary keyword (or "pick one" from the bank)
+- Any specific angle, season, or personal detail to fold in
+- Target word count (default 1,000)
 
 OUTPUT FORMAT
 Clean markdown only, no preamble:
 Meta description: [text]
 
 # [H1 Title]
-[body with ## / ### headers]
+[body with ## headers]
 ## FAQ
 [if applicable]
 [closing CTA line]`;
@@ -240,17 +246,54 @@ export function buildUserPrompt(topic: BlogTopic): string {
 }
 
 export async function generateBlogPost(topic: BlogTopic): Promise<string> {
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) throw new Error("GROQ_API_KEY is not set");
+  // Support multiple env var names — picks whichever is set
+  const envNames = [
+    "AI_API_KEY",
+    "OPENROUTER_API_KEY",
+    "GROQ_API_KEY",
+    "MIMO_API_KEY",
+  ];
+  let apiKey: string | undefined;
+  let provider = "";
+  for (const name of envNames) {
+    if (process.env[name]) {
+      apiKey = process.env[name];
+      provider = name;
+      break;
+    }
+  }
+  if (!apiKey) throw new Error(`No AI API key found. Set one of: ${envNames.join(", ")}`);
 
-  const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+  // Determine which API to call
+  const isGroq = provider === "GROQ_API_KEY" || apiKey.startsWith("gsk_");
+  const isOpenRouter = provider === "OPENROUTER_API_KEY" || apiKey.startsWith("sk-or-");
+
+  const url = isGroq
+    ? "https://api.groq.com/openai/v1/chat/completions"
+    : isOpenRouter
+      ? "https://openrouter.ai/api/v1/chat/completions"
+      : process.env.AI_API_URL || "https://api.groq.com/openai/v1/chat/completions";
+
+  const model = isGroq
+    ? "llama-3.3-70b-versatile"
+    : isOpenRouter
+      ? "anthropic/claude-sonnet-4"
+      : process.env.AI_MODEL || "llama-3.3-70b-versatile";
+
+  const headers: Record<string, string> = {
+    Authorization: `Bearer ${apiKey}`,
+    "Content-Type": "application/json",
+  };
+  if (isOpenRouter) {
+    headers["HTTP-Referer"] = "https://balifishboat.com";
+    headers["X-Title"] = "BaliFishBoat Blog Generator";
+  }
+
+  const response = await fetch(url, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
+    headers,
     body: JSON.stringify({
-      model: "llama-3.3-70b-versatile",
+      model,
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: buildUserPrompt(topic) },
@@ -262,7 +305,7 @@ export async function generateBlogPost(topic: BlogTopic): Promise<string> {
 
   if (!response.ok) {
     const err = await response.text();
-    throw new Error(`Groq API error: ${response.status} — ${err}`);
+    throw new Error(`AI API error (${provider}): ${response.status} — ${err}`);
   }
 
   const data = await response.json();
@@ -302,11 +345,13 @@ export function parseBlogMarkdown(raw: string): {
   const bodyLines = lines.slice(bodyStart);
   let body = bodyLines.join("\n").trim();
 
-  // Sanitize: strip ### (promote to ##), remove *** and ---
+  // Sanitize: strip ### (promote to ##), remove ***, ---, and **bold**
   body = body
     .replace(/^###\s+/gm, "## ")
+    .replace(/^####+\s+/gm, "## ")
     .replace(/\*\*\*/g, "")
-    .replace(/^---+$/gm, "");
+    .replace(/^---+$/gm, "")
+    .replace(/\*\*(.+?)\*\*/g, "$1"); // remove bold markers, keep text
 
   // Extract internal link markers
   const internalLinks: { anchor: string; note: string }[] = [];

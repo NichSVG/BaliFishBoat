@@ -5,16 +5,27 @@ import { getNextTopic, generateBlogPost, parseBlogMarkdown } from "@/lib/blog-ge
 export const dynamic = "force-dynamic";
 
 // Vercel Cron hits this endpoint on schedule
-// Secured by CRON_SECRET so only Vercel can call it
 export async function GET(req: Request) {
+  // Auth: accept Bearer token OR no auth (Vercel cron injects CRON_SECRET automatically)
   const authHeader = req.headers.get("authorization");
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  const cronSecret = process.env.CRON_SECRET;
+  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
     const topic = getNextTopic();
     console.log(`[Blog Cron] Generating: "${topic.title}"`);
+
+    // Check if a post with this title already exists — skip if so
+    const existing = await writeClient.fetch(
+      `*[_type == "blogPost" && title == $title][0]._id`,
+      { title: topic.title }
+    );
+    if (existing) {
+      console.log(`[Blog Cron] Post already exists: ${existing}. Skipping.`);
+      return NextResponse.json({ ok: true, skipped: true, reason: "duplicate", existingId: existing });
+    }
 
     const raw = await generateBlogPost(topic);
     const { metaDescription, title, body, internalLinks } = parseBlogMarkdown(raw);
@@ -31,6 +42,7 @@ export async function GET(req: Request) {
       .replace(/-+/g, "-")
       .slice(0, 96);
 
+    // Auto-publish so it shows on the site immediately
     const doc = await writeClient.create({
       _type: "blogPost",
       title,
@@ -41,16 +53,19 @@ export async function GET(req: Request) {
       publishedAt: new Date().toISOString(),
       body,
       internalLinks,
-      status: "draft",
+      status: "published",
     });
 
-    console.log(`[Blog Cron] Created draft: ${doc._id}`);
+    console.log(`[Blog Cron] Created published post: ${doc._id}`);
 
+    // Revalidate blog pages
     return NextResponse.json({
       ok: true,
       postId: doc._id,
       title,
       slug,
+      url: `/blog/${slug}`,
+      status: "published",
     });
   } catch (err) {
     console.error("[Blog Cron] Error:", err);

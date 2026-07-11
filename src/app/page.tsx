@@ -5,6 +5,7 @@ import ReviewBadges from "@/components/ReviewBadges";
 import Testimonials from "@/components/Testimonials";
 import FAQAccordion from "@/components/FAQAccordion";
 import LocationMap from "@/components/LocationMap";
+import HomepagePics from "@/components/HomepagePics";
 import Link from "next/link";
 import { Anchor, Fish, Waves, Shield, Clock, MapPin } from "lucide-react";
 import { getTripPackages, getCharter, getTestimonials, getReviewThemes } from "@/lib/data";
@@ -109,6 +110,9 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* From the Water — pics */}
+      <HomepagePics />
 
       {/* Reviews */}
       <section className="bg-white py-16">

@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import ScrollToTop from "@/components/ScrollToTop";
+import ScrollProgress from "@/components/ScrollProgress";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import { getCharter } from "@/lib/data";
 import { generateLocalBusinessSchema, generateFAQSchema } from "@/lib/structured-data";
@@ -50,6 +52,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#1e3a8a",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const charter = await getCharter();
   const localBusinessSchema = generateLocalBusinessSchema(charter ? {
@@ -67,10 +76,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <SchemaMarkup schema={[localBusinessSchema, faqSchema]} />
       </head>
       <body className={`${inter.className} antialiased bg-slate-50 text-slate-900`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white focus:font-semibold"
+        >
+          Skip to main content
+        </a>
+        <ScrollProgress />
         <Header />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
         <WhatsAppButton />
+        <ScrollToTop />
       </body>
     </html>
   );

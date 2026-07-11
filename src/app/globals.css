@@ -46,3 +46,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   opacity: 0.6;
 }
+
+/* Prevent body scroll shift */
+html {
+  scrollbar-gutter: stable;
+}

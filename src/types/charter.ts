@@ -55,3 +55,17 @@ export interface InquiryFormData {
   message?: string;
   honeypot?: string;
 }
+
+export interface BlogPostPreview {
+  slug: string;
+  title: string;
+  metaDescription: string;
+  primaryKeyword: string;
+  publishedAt: string;
+}
+
+export interface BlogPost extends BlogPostPreview {
+  secondaryKeywords: string[];
+  body: string;
+  internalLinks: { anchor: string; note: string }[];
+}

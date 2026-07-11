@@ -43,6 +43,9 @@ AVOID
 - Overpromising ("guaranteed catch," "best fishing in the world")
 - Mirroring competitor phrasing — FishingBooker, Viator, Pulau Private Charters, and various TripAdvisor listings all rank for the same terms; keep this genuinely original
 - Inventing marine biology facts, records, or regulations you're not certain of
+- NEVER use ### (triple hash) for subheadings — use only ## for H2 headings
+- NEVER use *** or --- (horizontal rules / thematic breaks) — they are banned
+- NEVER use bold (**text**) as section headers — use proper ## headings instead
 
 OUTPUT FORMAT
 Clean markdown only, no preamble:
@@ -237,19 +240,17 @@ export function buildUserPrompt(topic: BlogTopic): string {
 }
 
 export async function generateBlogPost(topic: BlogTopic): Promise<string> {
-  const apiKey = process.env.OPENROUTER_API_KEY;
-  if (!apiKey) throw new Error("OPENROUTER_API_KEY is not set");
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) throw new Error("GROQ_API_KEY is not set");
 
-  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
-      "HTTP-Referer": "https://balifishboat.com",
-      "X-Title": "BaliFishBoat Blog Generator",
     },
     body: JSON.stringify({
-      model: "anthropic/claude-sonnet-4",
+      model: "llama-3.3-70b-versatile",
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: buildUserPrompt(topic) },
@@ -261,7 +262,7 @@ export async function generateBlogPost(topic: BlogTopic): Promise<string> {
 
   if (!response.ok) {
     const err = await response.text();
-    throw new Error(`OpenRouter API error: ${response.status} — ${err}`);
+    throw new Error(`Groq API error: ${response.status} — ${err}`);
   }
 
   const data = await response.json();
@@ -299,7 +300,13 @@ export function parseBlogMarkdown(raw: string): {
 
   // Extract body (everything after H1)
   const bodyLines = lines.slice(bodyStart);
-  const body = bodyLines.join("\n").trim();
+  let body = bodyLines.join("\n").trim();
+
+  // Sanitize: strip ### (promote to ##), remove *** and ---
+  body = body
+    .replace(/^###\s+/gm, "## ")
+    .replace(/\*\*\*/g, "")
+    .replace(/^---+$/gm, "");
 
   // Extract internal link markers
   const internalLinks: { anchor: string; note: string }[] = [];

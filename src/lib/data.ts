@@ -1,5 +1,5 @@
 import { client } from "@/sanity/client";
-import type { Charter, TripPackage, Testimonial, ReviewThemes } from "@/types/charter";
+import type { Charter, TripPackage, Testimonial, ReviewThemes, BlogPost, BlogPostPreview } from "@/types/charter";
 
 // Trip Packages
 const tripPackagesQuery = `*[_type == "tripPackage"] | order(priceUsd asc){
@@ -47,6 +47,26 @@ const testimonialsQuery = `*[_type == "testimonial"] | order(_createdAt desc){
   quote
 }`;
 
+// Blog Posts
+const blogPostsQuery = `*[_type == "blogPost" && status == "published"] | order(publishedAt desc){
+  "slug": slug.current,
+  title,
+  metaDescription,
+  primaryKeyword,
+  publishedAt
+}`;
+
+const blogPostBySlugQuery = `*[_type == "blogPost" && slug.current == $slug && status == "published"][0]{
+  "slug": slug.current,
+  title,
+  metaDescription,
+  primaryKeyword,
+  secondaryKeywords,
+  publishedAt,
+  body,
+  internalLinks
+}`;
+
 export async function getTripPackages(): Promise<TripPackage[]> {
   return client.fetch(tripPackagesQuery);
 }
@@ -63,6 +83,14 @@ export async function getCharter(): Promise<
 
 export async function getTestimonials(): Promise<Testimonial[]> {
   return client.fetch(testimonialsQuery);
+}
+
+export async function getBlogPosts(): Promise<BlogPostPreview[]> {
+  return client.fetch(blogPostsQuery);
+}
+
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  return client.fetch(blogPostBySlugQuery, { slug });
 }
 
 export function getReviewThemes(): ReviewThemes {

@@ -20,6 +20,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.54.0",
+    "react-markdown": "^10.1.0",
     "resend": "^4.1.2",
     "sanity": "^3.75.0",
     "zod": "^3.25.0"

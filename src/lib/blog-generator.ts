@@ -362,5 +362,11 @@ export function parseBlogMarkdown(raw: string): {
     internalLinks.push({ anchor: match[1], note: "Add link to relevant page" });
   }
 
+  // Replace [INTERNAL LINK: anchor text] with markdown links to /contact
+  body = body.replace(
+    /\[INTERNAL LINK:\s*(.+?)\]/g,
+    "[$1](/contact)"
+  );
+
   return { metaDescription, title, body, internalLinks };
 }

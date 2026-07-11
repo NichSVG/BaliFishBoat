@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import TripCard from "@/components/TripCard";
 import ReviewBadges from "@/components/ReviewBadges";
@@ -7,7 +8,21 @@ import LocationMap from "@/components/LocationMap";
 import Link from "next/link";
 import { Anchor, Fish, Waves, Shield, Clock, MapPin } from "lucide-react";
 import { getTripPackages, getCharter, getTestimonials, getReviewThemes } from "@/lib/data";
-import { INCLUSIONS, TARGET_SPECIES, TECHNIQUES } from "@/lib/constants";
+import { INCLUSIONS, TARGET_SPECIES, TECHNIQUES, SITE_URL } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: "Private Fishing Charters in Bali — Serangan Departures",
+  description:
+    "Book a private fishing charter in Bali. Half-day and full-day trips from Serangan targeting Yellowfin Tuna, Mahi Mahi, GT, and more.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Private Fishing Charters in Bali — Serangan Departures",
+    description:
+      "Book a private fishing charter in Bali. Half-day and full-day trips from Serangan targeting Yellowfin Tuna, Mahi Mahi, GT, and more.",
+    url: SITE_URL,
+    images: [{ url: "/images/hero-bg.jpg", width: 1200, height: 630, alt: "Bali fishing charter" }],
+  },
+};
 
 export default async function HomePage() {
   const [trips, charter, testimonials] = await Promise.all([

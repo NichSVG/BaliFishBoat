@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
 import BookingInquiryForm from "@/components/BookingInquiryForm";
 import LocationMap from "@/components/LocationMap";
-import { WHATSAPP_LINK } from "@/lib/constants";
+import { WHATSAPP_LINK, SITE_URL } from "@/lib/constants";
 import { getTripPackages } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Contact & Book",
+  title: "Contact & Book Your Bali Fishing Charter",
   description:
-    "Book your Bali fishing charter. Send an inquiry or reach us on WhatsApp.",
+    "Ready to fish? Send an inquiry or reach us on WhatsApp to book your Bali fishing charter from Serangan.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact & Book Your Bali Fishing Charter",
+    description:
+      "Ready to fish? Send an inquiry or reach us on WhatsApp to book your Bali fishing charter.",
+    url: `${SITE_URL}/contact`,
+  },
 };
 
 export default async function ContactPage() {

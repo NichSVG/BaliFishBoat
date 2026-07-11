@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock, Anchor, Users, DollarSign, Check } from "lucide-react";
 import { getTripPackageBySlug, getTripPackages } from "@/lib/data";
-import { INCLUSIONS } from "@/lib/constants";
+import { INCLUSIONS, SITE_URL } from "@/lib/constants";
+import SchemaMarkup from "@/components/SchemaMarkup";
+import { generateTripProductSchema, generateBreadcrumbSchema } from "@/lib/structured-data";
 
 export async function generateStaticParams() {
   const trips = await getTripPackages();
@@ -19,8 +21,15 @@ export async function generateMetadata({
   const trip = await getTripPackageBySlug(slug);
   if (!trip) return {};
   return {
-    title: trip.name,
-    description: trip.description,
+    title: `${trip.name} — Bali Fishing Charter`,
+    description: trip.description.slice(0, 155),
+    alternates: { canonical: `/trips/${slug}` },
+    openGraph: {
+      title: `${trip.name} — Bali Fishing Charter`,
+      description: trip.description.slice(0, 155),
+      url: `${SITE_URL}/trips/${slug}`,
+      type: "website",
+    },
   };
 }
 
@@ -33,8 +42,16 @@ export default async function TripDetailPage({
   const trip = await getTripPackageBySlug(slug);
   if (!trip) notFound();
 
+  const productSchema = generateTripProductSchema(trip);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Trip Packages", url: "/trips" },
+    { name: trip.name, url: `/trips/${slug}` },
+  ]);
+
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16">
+      <SchemaMarkup schema={[productSchema, breadcrumbSchema]} />
       <Link href="/trips" className="text-sm text-blue-600 hover:underline mb-6 inline-block">
         &larr; Back to all trips
       </Link>

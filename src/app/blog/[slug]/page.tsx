@@ -4,6 +4,9 @@ import { notFound } from "next/navigation";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/data";
 import { ArrowLeft, Calendar, Tag } from "lucide-react";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import SchemaMarkup from "@/components/SchemaMarkup";
+import { generateBlogPostSchema, generateBreadcrumbSchema } from "@/lib/structured-data";
+import { SITE_URL } from "@/lib/constants";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -19,9 +22,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.metaDescription,
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       title: post.title,
       description: post.metaDescription,
+      url: `${SITE_URL}/blog/${slug}`,
       type: "article",
       publishedTime: post.publishedAt,
     },
@@ -33,8 +38,17 @@ export default async function BlogPostPage({ params }: Props) {
   const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
+  const blogSchema = generateBlogPostSchema(post);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+    { name: post.title, url: `/blog/${slug}` },
+  ]);
+
   return (
     <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16">
+      <SchemaMarkup schema={[blogSchema, breadcrumbSchema]} />
+
       <Link
         href="/blog"
         className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 mb-8"

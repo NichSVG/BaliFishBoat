@@ -20,5 +20,19 @@ export const tripPackage = defineType({
     defineField({ name: "priceUsd", title: "Price (USD)", type: "number", validation: (r) => r.required().min(0) }),
     defineField({ name: "includes", title: "Includes", type: "array", of: [{ type: "string" }] }),
     defineField({ name: "description", title: "Description", type: "text", validation: (r) => r.required() }),
+    defineField({
+      name: "tripImage",
+      title: "Trip Image",
+      type: "image",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+          validation: (r) => r.required(),
+        }),
+      ],
+    }),
   ],
 });

@@ -73,6 +73,20 @@ export const blogPost = defineType({
       },
       initialValue: "draft",
     }),
+    defineField({
+      name: "ogImage",
+      title: "Social Share Image (1200x630)",
+      type: "image",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+          validation: (r) => r.required(),
+        }),
+      ],
+    }),
   ],
   preview: {
     select: { title: "title", subtitle: "primaryKeyword", media: "status" },

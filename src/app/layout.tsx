@@ -3,7 +3,11 @@ import { Inter } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
+import SchemaMarkup from "@/components/SchemaMarkup";
+import { getCharter } from "@/lib/data";
+import { generateLocalBusinessSchema, generateFAQSchema } from "@/lib/structured-data";
+import { SITE_NAME, SITE_DESCRIPTION, SITE_URL, WHATSAPP_NUMBER } from "@/lib/constants";
+import { FAQS } from "@/lib/constants";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,18 +19,30 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: SITE_NAME,
+    title: `${SITE_NAME} — Private Fishing Charters in Bali`,
     description: SITE_DESCRIPTION,
     url: SITE_URL,
     siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/images/hero-bg.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} fishing charter in Bali`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: SITE_NAME,
+    title: `${SITE_NAME} — Private Fishing Charters in Bali`,
     description: SITE_DESCRIPTION,
+    images: ["/images/hero-bg.jpg"],
   },
   robots: {
     index: true,
@@ -34,9 +50,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const charter = await getCharter();
+  const localBusinessSchema = generateLocalBusinessSchema(charter ? {
+    name: charter.name,
+    tagline: charter.tagline,
+    ratingSnapshot: charter.ratingSnapshot,
+    location: charter.location,
+    targetSpecies: charter.targetSpecies,
+  } : undefined);
+  const faqSchema = generateFAQSchema(FAQS);
+
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <SchemaMarkup schema={[localBusinessSchema, faqSchema]} />
+      </head>
       <body className={`${inter.className} antialiased bg-slate-50 text-slate-900`}>
         <Header />
         <main>{children}</main>

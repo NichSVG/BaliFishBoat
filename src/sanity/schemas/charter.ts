@@ -45,5 +45,19 @@ export const charter = defineType({
     defineField({ name: "includedAsStandard", title: "Included as Standard", type: "array", of: [{ type: "string" }] }),
     defineField({ name: "targetSpecies", title: "Target Species", type: "array", of: [{ type: "string" }] }),
     defineField({ name: "techniques", title: "Techniques", type: "array", of: [{ type: "string" }] }),
+    defineField({
+      name: "ogImage",
+      title: "Social Share Image (1200x630)",
+      type: "image",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+          validation: (r) => r.required(),
+        }),
+      ],
+    }),
   ],
 });

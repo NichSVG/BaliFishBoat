@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
 import Gallery from "@/components/Gallery";
+import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Gallery",
-  description: "Photos from our fishing charters in Bali — catches, boats, and ocean views.",
+  title: "Fishing Charter Photos & Gallery",
+  description:
+    "Photos from our Bali fishing charters — catches, the boat, and moments on the water out of Serangan.",
+  alternates: { canonical: "/gallery" },
+  openGraph: {
+    title: "Fishing Charter Photos & Gallery",
+    description:
+      "Photos from our Bali fishing charters — catches, the boat, and moments on the water.",
+    url: `${SITE_URL}/gallery`,
+  },
 };
 
 export default function GalleryPage() {

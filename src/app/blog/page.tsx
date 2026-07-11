@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getBlogPosts } from "@/lib/data";
+import { SITE_URL } from "@/lib/constants";
 import { Fish } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Fishing Blog",
+  title: "Bali Fishing Blog — Tips, Species & Seasonal Guides",
   description:
-    "Tips, species guides, and local knowledge from Bali's waters — written by the captains who fish them every day.",
+    "Bali fishing blog with species guides, seasonal tips, and local knowledge from captains who fish Serangan waters daily.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Bali Fishing Blog — Tips, Species & Seasonal Guides",
+    description:
+      "Bali fishing blog with species guides, seasonal tips, and local knowledge from Serangan captains.",
+    url: `${SITE_URL}/blog`,
+  },
 };
 
 export default async function BlogPage() {

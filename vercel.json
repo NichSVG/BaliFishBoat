@@ -1,5 +1,11 @@
 {
   "framework": "nextjs",
   "buildCommand": "pnpm build",
-  "installCommand": "pnpm install"
+  "installCommand": "pnpm install",
+  "crons": [
+    {
+      "path": "/api/cron/generate-blog",
+      "schedule": "0 8 * * 1"
+    }
+  ]
 }

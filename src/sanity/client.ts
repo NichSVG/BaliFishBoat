@@ -9,6 +9,16 @@ export const client = createClient({
   dataset,
   apiVersion,
   useCdn: true,
+  // Add cache control for ISR — fetch fresh data on revalidation
+  perspective: "published",
+});
+
+// Non-CDN client for freshness-critical queries (blog listing, sitemap)
+export const freshClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
 });
 
 export const writeClient = createClient({

@@ -218,13 +218,25 @@ export const BLOG_TOPICS: BlogTopic[] = [
   },
 ];
 
-export function getNextTopic(): BlogTopic {
-  // Use month (1-12) and week-of-month to pick topic deterministically
-  const now = new Date();
-  const month = now.getMonth(); // 0-11
-  const weekOfMonth = Math.floor(now.getDate() / 7); // 0-4
+export function getNextTopic(existingTitles?: string[]): BlogTopic {
+  // If we have existing titles, skip topics that already have posts
+  if (existingTitles && existingTitles.length > 0) {
+    const lowerTitles = existingTitles.map((t) => t.toLowerCase());
+    const available = BLOG_TOPICS.filter(
+      (t) => !lowerTitles.includes(t.title.toLowerCase())
+    );
+    if (available.length > 0) {
+      // Pick based on date for deterministic but varied selection
+      const now = new Date();
+      const idx = (now.getMonth() + now.getDate()) % available.length;
+      return available[idx];
+    }
+  }
 
-  // 4 posts per month, rotating through 24 topics over 6 months
+  // Fallback: use date-based rotation
+  const now = new Date();
+  const month = now.getMonth();
+  const weekOfMonth = Math.floor(now.getDate() / 7);
   const topicIndex = (month * 4 + weekOfMonth) % BLOG_TOPICS.length;
   return BLOG_TOPICS[topicIndex];
 }

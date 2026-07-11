@@ -4,6 +4,8 @@ import { getBlogPosts } from "@/lib/data";
 import { SITE_URL } from "@/lib/constants";
 import { Fish } from "lucide-react";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Bali Fishing Blog — Tips, Species & Seasonal Guides",
   description:

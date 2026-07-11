@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { writeClient } from "@/sanity/client";
 import { getNextTopic, generateBlogPost, parseBlogMarkdown } from "@/lib/blog-generator";
 
@@ -6,7 +7,6 @@ export const dynamic = "force-dynamic";
 
 // Vercel Cron hits this endpoint on schedule
 export async function GET(req: Request) {
-  // Auth: accept Bearer token OR no auth (Vercel cron injects CRON_SECRET automatically)
   const authHeader = req.headers.get("authorization");
   const cronSecret = process.env.CRON_SECRET;
   if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
@@ -14,17 +14,22 @@ export async function GET(req: Request) {
   }
 
   try {
-    const topic = getNextTopic();
+    // Fetch all existing blog post titles to avoid duplicates
+    const existingPosts: { title: string; slug: string }[] = await writeClient.fetch(
+      `*[_type == "blogPost"]{ title, "slug": slug.current }`
+    );
+    const existingTitles = existingPosts.map((p) => p.title);
+    const existingSlugs = existingPosts.map((p) => p.slug);
+
+    // Pick the next topic that doesn't duplicate
+    const topic = getNextTopic(existingTitles);
     console.log(`[Blog Cron] Generating: "${topic.title}"`);
 
-    // Check if a post with this title already exists — skip if so
-    const existing = await writeClient.fetch(
-      `*[_type == "blogPost" && title == $title][0]._id`,
-      { title: topic.title }
-    );
-    if (existing) {
-      console.log(`[Blog Cron] Post already exists: ${existing}. Skipping.`);
-      return NextResponse.json({ ok: true, skipped: true, reason: "duplicate", existingId: existing });
+    // Double-check by title (in case AI changes it slightly, we also check slug later)
+    const lowerExisting = existingTitles.map((t) => t.toLowerCase());
+    if (lowerExisting.includes(topic.title.toLowerCase())) {
+      console.log(`[Blog Cron] Topic already exists. Skipping.`);
+      return NextResponse.json({ ok: true, skipped: true, reason: "duplicate topic" });
     }
 
     const raw = await generateBlogPost(topic);
@@ -42,6 +47,12 @@ export async function GET(req: Request) {
       .replace(/-+/g, "-")
       .slice(0, 96);
 
+    // Check if slug already exists — skip if so
+    if (existingSlugs.includes(slug)) {
+      console.log(`[Blog Cron] Slug "${slug}" already exists. Skipping.`);
+      return NextResponse.json({ ok: true, skipped: true, reason: "duplicate slug", slug });
+    }
+
     // Auto-publish so it shows on the site immediately
     const doc = await writeClient.create({
       _type: "blogPost",
@@ -58,7 +69,11 @@ export async function GET(req: Request) {
 
     console.log(`[Blog Cron] Created published post: ${doc._id}`);
 
-    // Revalidate blog pages
+    // Revalidate blog pages so the new post appears immediately
+    revalidatePath("/blog");
+    revalidatePath(`/blog/${slug}`);
+    revalidatePath("/sitemap.xml");
+
     return NextResponse.json({
       ok: true,
       postId: doc._id,

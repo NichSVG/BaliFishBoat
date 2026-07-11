@@ -10,6 +10,8 @@ import { SITE_URL } from "@/lib/constants";
 
 type Props = { params: Promise<{ slug: string }> };
 
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
   return posts.map((p) => ({ slug: p.slug }));

@@ -1,4 +1,4 @@
-import { client } from "@/sanity/client";
+import { client, freshClient } from "@/sanity/client";
 import type { Charter, TripPackage, Testimonial, ReviewThemes, BlogPost, BlogPostPreview } from "@/types/charter";
 
 // Trip Packages
@@ -86,11 +86,11 @@ export async function getTestimonials(): Promise<Testimonial[]> {
 }
 
 export async function getBlogPosts(): Promise<BlogPostPreview[]> {
-  return client.fetch(blogPostsQuery);
+  return freshClient.fetch(blogPostsQuery);
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
-  return client.fetch(blogPostBySlugQuery, { slug });
+  return freshClient.fetch(blogPostBySlugQuery, { slug });
 }
 
 export function getReviewThemes(): ReviewThemes {

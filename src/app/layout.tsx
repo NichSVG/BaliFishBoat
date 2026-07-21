@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import MobileBookBar from "@/components/MobileBookBar";
 import ScrollToTop from "@/components/ScrollToTop";
 import ScrollProgress from "@/components/ScrollProgress";
 import SchemaMarkup from "@/components/SchemaMarkup";
@@ -12,7 +13,13 @@ import { SITE_NAME, SITE_DESCRIPTION, SITE_URL, WHATSAPP_NUMBER } from "@/lib/co
 import { FAQS } from "@/lib/constants";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -53,7 +60,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1e3a8a",
+  themeColor: "#082834",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -75,18 +82,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <SchemaMarkup schema={[localBusinessSchema, faqSchema]} />
       </head>
-      <body className={`${inter.className} antialiased bg-slate-50 text-slate-900`}>
+      <body className={`${inter.variable} ${fraunces.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white focus:font-semibold"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-primary-700 focus:px-4 focus:py-2 focus:text-white focus:font-semibold"
         >
           Skip to main content
         </a>
         <ScrollProgress />
         <Header />
-        <main id="main-content">{children}</main>
+        {/* pb-20 compensates for the mobile sticky book bar */}
+        <main id="main-content" className="pb-20 md:pb-0">{children}</main>
         <Footer />
         <WhatsAppButton />
+        <MobileBookBar />
         <ScrollToTop />
       </body>
     </html>

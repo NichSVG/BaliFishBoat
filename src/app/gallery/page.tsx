@@ -18,10 +18,15 @@ export const metadata: Metadata = {
 
 export default function GalleryPage() {
   return (
-    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-      <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold text-slate-900 mb-3">Gallery</h1>
-        <p className="text-slate-600">Photos and videos from our fishing trips around Bali</p>
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div className="text-center mb-10 lg:mb-14">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-600 mb-3">Gallery</p>
+        <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-primary-950 mb-4">
+          Bali Fishing Charter Photo Gallery
+        </h1>
+        <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+          Photos and videos from our fishing trips around Bali — real guests, real catches.
+        </p>
       </div>
       <Gallery />
       {galleryVideos.length === 0 && (

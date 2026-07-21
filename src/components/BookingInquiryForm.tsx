@@ -72,10 +72,12 @@ Reply to this message to confirm the booking.`;
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl bg-green-50 border border-green-200 p-8 text-center">
-        <Check className="h-10 w-10 text-green-600 mx-auto mb-3" />
-        <h3 className="text-xl font-bold text-green-800 mb-2">Inquiry Sent!</h3>
-        <p className="text-green-700">
+      <div className="rounded-2xl bg-seafoam-50 border border-primary-200 p-8 text-center">
+        <span className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-white shadow-card mb-4">
+          <Check className="h-8 w-8 text-primary-600" />
+        </span>
+        <h3 className="font-display text-2xl text-primary-950 mb-2">Inquiry Sent!</h3>
+        <p className="text-slate-600 max-w-md mx-auto">
           WhatsApp opened with your details. We&apos;ve also sent you an email confirmation.
           We&apos;ll get back to you shortly!
         </p>
@@ -93,7 +95,7 @@ Reply to this message to confirm the booking.`;
           <input
             id="name"
             {...register("name")}
-            className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+            className="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 text-[15px] focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition"
           />
           {errors.name && <p className="text-red-600 text-xs mt-1">{errors.name.message}</p>}
         </div>
@@ -105,7 +107,7 @@ Reply to this message to confirm the booking.`;
             id="email"
             type="email"
             {...register("email")}
-            className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+            className="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 text-[15px] focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition"
           />
           {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email.message}</p>}
         </div>
@@ -118,7 +120,7 @@ Reply to this message to confirm the booking.`;
         <input
           id="phone"
           {...register("phone")}
-          className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+          className="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 text-[15px] focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition"
         />
       </div>
 
@@ -130,7 +132,7 @@ Reply to this message to confirm the booking.`;
           <select
             id="packageSlug"
             {...register("packageSlug")}
-            className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+            className="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 text-[15px] focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition"
           >
             <option value="">Select a trip</option>
             {trips.map((t) => (
@@ -151,7 +153,7 @@ Reply to this message to confirm the booking.`;
             id="preferredDate"
             type="date"
             {...register("preferredDate")}
-            className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+            className="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 text-[15px] focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition"
           />
           {errors.preferredDate && (
             <p className="text-red-600 text-xs mt-1">{errors.preferredDate.message}</p>
@@ -167,7 +169,7 @@ Reply to this message to confirm the booking.`;
             min={1}
             max={8}
             {...register("partySize")}
-            className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+            className="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 text-[15px] focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition"
           />
           {errors.partySize && (
             <p className="text-red-600 text-xs mt-1">{errors.partySize.message}</p>
@@ -183,7 +185,7 @@ Reply to this message to confirm the booking.`;
           id="message"
           rows={4}
           {...register("message")}
-          className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none resize-none"
+          className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-[15px] focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition resize-none"
         />
       </div>
 
@@ -195,7 +197,7 @@ Reply to this message to confirm the booking.`;
       <button
         type="submit"
         disabled={status === "sending"}
-        className="inline-flex items-center gap-2 rounded-full bg-green-600 px-8 py-3 text-sm font-semibold text-white hover:bg-green-700 transition-colors disabled:opacity-50"
+        className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-whatsapp h-12 px-8 text-base font-semibold text-white shadow-cta hover:bg-whatsapp-dark active:scale-[0.98] transition-all disabled:opacity-50"
       >
         {status === "sending" ? (
           <>

@@ -1,43 +1,89 @@
 @import "tailwindcss";
 
+/* ============================================
+   SERANGAN DESIGN SYSTEM — see REDESIGN-BLUEPRINT.md §14
+   ============================================ */
+
 @keyframes wave-slow {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
-@keyframes wave-medium {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes wave-fast {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+
+@keyframes pulse-soft {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); }
+  50% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
 }
 
 @theme {
-  --animate-wave-slow: wave-slow 18s linear infinite;
-  --animate-wave-medium: wave-medium 12s linear infinite;
-  --animate-wave-fast: wave-fast 8s linear infinite;
-}
+  /* Primary — deep sea teal-navy */
+  --color-primary-50: #eff7f9;
+  --color-primary-100: #d9edf1;
+  --color-primary-200: #b4dce4;
+  --color-primary-300: #84c3d1;
+  --color-primary-400: #4ca4b8;
+  --color-primary-500: #2c869c;
+  --color-primary-600: #1f6c83;
+  --color-primary-700: #1a586c;
+  --color-primary-800: #154757;
+  --color-primary-900: #103a48;
+  --color-primary-950: #082834;
 
-:root {
-  --color-blue-50: #eff6ff;
-  --color-blue-100: #dbeafe;
-  --color-blue-600: #2563eb;
-  --color-blue-800: #1e40af;
-  --color-blue-900: #1e3a8a;
+  /* Lagoon — bright sea accent (sparingly: on dark) */
+  --color-lagoon-300: #7fd8de;
+  --color-lagoon-400: #4cc2cc;
+
+  /* Sand & seafoam — light section surfaces */
+  --color-sand-50: #faf7f1;
+  --color-sand-100: #f2ecdf;
+  --color-seafoam-50: #f0f8f6;
+  --color-seafoam-100: #e0f0ec;
+
+  /* Gold — ratings, accents, "most popular" */
+  --color-gold-300: #e9cc82;
+  --color-gold-400: #dcb458;
+  --color-gold-500: #c99a3c;
+  --color-gold-600: #a87e2c;
+
+  /* WhatsApp — conversion actions only */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1da851;
+
+  /* Fonts */
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Shadows — navy-tinted elevation */
+  --shadow-card: 0 1px 2px rgba(8, 40, 53, 0.05), 0 8px 24px -8px rgba(8, 40, 53, 0.1);
+  --shadow-card-hover: 0 2px 4px rgba(8, 40, 53, 0.06), 0 20px 44px -14px rgba(8, 40, 53, 0.22);
+  --shadow-cta: 0 8px 24px -6px rgba(37, 211, 102, 0.45);
+  --shadow-bar: 0 -4px 16px rgba(8, 40, 53, 0.08);
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Animations */
+  --animate-wave-slow: wave-slow 18s linear infinite;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out 3;
 }
 
 html {
   scroll-behavior: smooth;
+  /* Prevent body scroll shift */
+  scrollbar-gutter: stable;
 }
 
 body {
   min-height: 100vh;
 }
 
+/* Remove mobile tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Smooth focus rings */
 *:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid #2c869c;
   outline-offset: 2px;
 }
 
@@ -47,7 +93,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0.6;
 }
 
-/* Prevent body scroll shift */
-html {
-  scrollbar-gutter: stable;
+/* Scroll-reveal base states (driven by <Reveal/>) */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Reduced motion — disable all decorative motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-wave-slow,
+  .animate-pulse-soft {
+    animation: none !important;
+  }
+  .reveal-hidden,
+  .reveal-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

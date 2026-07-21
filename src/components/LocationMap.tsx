@@ -2,10 +2,12 @@ import { MapPin } from "lucide-react";
 
 export default function LocationMap() {
   return (
-    <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
-      <div className="bg-slate-50 p-4 flex items-center gap-2">
-        <MapPin className="h-5 w-5 text-blue-600" />
-        <span className="text-sm font-medium text-slate-700">
+    <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-card bg-white">
+      <div className="p-4 flex items-center gap-2">
+        <span className="flex items-center justify-center h-9 w-9 rounded-full bg-seafoam-100">
+          <MapPin className="h-5 w-5 text-primary-700" />
+        </span>
+        <span className="text-sm font-medium text-primary-950">
           Serangan Harbor, Denpasar, Bali
         </span>
       </div>

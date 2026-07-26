@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { inquirySchema } from "@/lib/validations";
+import { writeClient } from "@/sanity/client";
 
 export const dynamic = "force-dynamic";
 
@@ -23,6 +24,19 @@ export async function POST(req: Request) {
     if (data.honeypot) {
       return NextResponse.json({ ok: true }); // silently reject bots
     }
+
+    // Save inquiry to Sanity
+    await writeClient.create({
+      _type: "inquiry",
+      name: data.name,
+      email: data.email,
+      phone: data.phone || "",
+      packageSlug: data.packageSlug,
+      preferredDate: data.preferredDate,
+      partySize: data.partySize,
+      message: data.message || "",
+      status: "new",
+    });
 
     // Send email via Resend
     const packageNames: Record<string, string> = {

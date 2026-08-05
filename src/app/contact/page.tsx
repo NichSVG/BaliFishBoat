@@ -16,6 +16,12 @@ export const metadata: Metadata = {
       "Ready to fish? Send an inquiry or reach us on WhatsApp to book your Bali fishing charter.",
     url: `${SITE_URL}/contact`,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Book a Bali Fishing Charter — Contact",
+    description:
+      "Ready to fish? Send an inquiry or reach us on WhatsApp to book your Bali fishing charter.",
+  },
 };
 
 export default async function ContactPage() {

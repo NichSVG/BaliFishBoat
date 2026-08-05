@@ -9,6 +9,7 @@ import {
 import { getTripPackageBySlug, getTripPackages, getCharter } from "@/lib/data";
 import { INCLUSIONS, SITE_URL, WHATSAPP_LINK, TARGET_SPECIES, TECHNIQUES } from "@/lib/constants";
 import { TRIP_IMAGES, TRIP_IMAGE_FALLBACK } from "@/lib/ui-data";
+import { BLUR_PLACEHOLDER } from "@/lib/ui-data";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import FAQAccordion from "@/components/FAQAccordion";
 import TripCard from "@/components/TripCard";
@@ -40,6 +41,12 @@ export async function generateMetadata({
       url: `${SITE_URL}/trips/${slug}`,
       type: "website",
       images: [{ url: image, width: 1200, height: 750, alt: `${trip.name} — Bali fishing charter` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${trip.name} — Bali Fishing Charter`,
+      description: trip.description.slice(0, 155),
+      images: [image],
     },
   };
 }
@@ -242,6 +249,8 @@ export default async function TripDetailPage({
                   priority
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 66vw"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMCwsKCwsM EBcQERMRCwsMEBgPEhMSFBITExIYFRYYHB4fHhT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAEAAQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAFRABAQAAAAAAAAAAAAAAAAAAAAf/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8Apg//2Q=="
+                  placeholder="blur"
                 />
               </div>
               <div className="grid grid-cols-3 gap-3">
@@ -257,6 +266,8 @@ export default async function TripDetailPage({
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                       sizes="(max-width: 1024px) 33vw, 22vw"
+                      placeholder="blur"
+                      blurDataURL={BLUR_PLACEHOLDER}
                     />
                   </Link>
                 ))}

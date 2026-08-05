@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { getTripPackages, getCharter, getTestimonials, getReviewThemes } from "@/lib/data";
 import { TARGET_SPECIES, TECHNIQUES, SITE_URL, WHATSAPP_LINK } from "@/lib/constants";
+import { BLUR_PLACEHOLDER } from "@/lib/ui-data";
 
 export const metadata: Metadata = {
   title: "Private Fishing Charters in Bali — Serangan Departures",
@@ -32,6 +33,13 @@ export const metadata: Metadata = {
       "Book a private fishing charter in Bali. Half-day and full-day trips from Serangan targeting Yellowfin Tuna, Mahi Mahi, GT, and more.",
     url: SITE_URL,
     images: [{ url: "/images/hero-bg.jpg", width: 1200, height: 630, alt: "Bali fishing charter" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Private Fishing Charters in Bali — Serangan Departures",
+    description:
+      "Book a private fishing charter in Bali. Half-day and full-day trips from Serangan targeting Yellowfin Tuna, Mahi Mahi, GT, and more.",
+    images: ["/images/hero-bg.jpg"],
   },
 };
 
@@ -183,6 +191,8 @@ export default async function HomePage() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     sizes="176px"
+                    placeholder="blur"
+                    blurDataURL={BLUR_PLACEHOLDER}
                   />
                 </Link>
               ))}

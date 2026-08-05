@@ -14,6 +14,12 @@ export const metadata: Metadata = {
       "Photos and videos from our Bali fishing charters \u2014 catches, the boat, and moments on the water.",
     url: `${SITE_URL}/gallery`,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fishing Charter Photos & Videos — Gallery",
+    description:
+      "Photos and videos from our Bali fishing charters — catches, the boat, and moments on the water.",
+  },
 };
 
 export default function GalleryPage() {

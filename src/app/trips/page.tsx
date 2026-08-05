@@ -20,6 +20,12 @@ export const metadata: Metadata = {
       "Browse Bali fishing charter packages — half-day, full-day, shared and private trips from Serangan.",
     url: `${SITE_URL}/trips`,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bali Fishing Trip Packages & Prices",
+    description:
+      "Browse Bali fishing charter packages — half-day, full-day, shared and private trips from Serangan.",
+  },
 };
 
 export default async function TripsPage() {

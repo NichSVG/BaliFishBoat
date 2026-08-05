@@ -14,7 +14,8 @@ const tripPackagesQuery = `*[_type == "tripPackage"] | order(priceUsd asc){
   priceUsd,
   pricingUnit,
   includes,
-  description
+  description,
+  _updatedAt
 }`;
 
 const tripPackageBySlugQuery = `*[_type == "tripPackage" && slug.current == $slug][0]{

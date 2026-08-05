@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, Play, MessageCircle } from "lucide-react";
 import { galleryVideos } from "@/lib/galleryData";
 import { WHATSAPP_LINK } from "@/lib/constants";
+import { BLUR_PLACEHOLDER } from "@/lib/ui-data";
 
 type Category = "catches" | "boat" | "guests" | "onboard";
 
@@ -169,6 +170,8 @@ export default function Gallery() {
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 1024px) 50vw, 33vw"
+                placeholder="blur"
+                blurDataURL={BLUR_PLACEHOLDER}
               />
               {item.type === "video" && (
                 <>

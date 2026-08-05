@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const tripPages = trips.map((t) => ({
     url: `${SITE_URL}/trips/${t.slug}`,
-    lastModified: new Date(),
+    lastModified: t._updatedAt ? new Date(t._updatedAt) : new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));

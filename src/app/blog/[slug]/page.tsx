@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ChevronRight } from "lucide-react";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/data";
 import { ArrowLeft, Calendar, Tag, Clock, Fish } from "lucide-react";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import { generateBlogPostSchema, generateBreadcrumbSchema } from "@/lib/structured-data";
-import { SITE_URL } from "@/lib/constants";
+import { SITE_URL, SITE_NAME } from "@/lib/constants";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -31,6 +32,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `${SITE_URL}/blog/${slug}`,
       type: "article",
       publishedTime: post.publishedAt,
+      images: [{ url: "/images/hero-bg.jpg", width: 1200, height: 630, alt: `${post.title} — ${SITE_NAME}` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.metaDescription,
+      images: ["/images/hero-bg.jpg"],
     },
   };
 }
@@ -52,6 +60,15 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16">
       <SchemaMarkup schema={[blogSchema, breadcrumbSchema]} />
+
+      {/* Breadcrumb */}
+      <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-slate-500 mb-6">
+        <Link href="/" className="hover:text-primary-600 transition-colors">Home</Link>
+        <ChevronRight className="h-3.5 w-3.5" />
+        <Link href="/blog" className="hover:text-primary-600 transition-colors">Blog</Link>
+        <ChevronRight className="h-3.5 w-3.5" />
+        <span className="text-primary-950 font-medium truncate max-w-[50vw]">{post.title}</span>
+      </nav>
 
       <Link
         href="/blog"

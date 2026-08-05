@@ -17,6 +17,12 @@ export const metadata: Metadata = {
       "Bali fishing blog with species guides, seasonal tips, and local knowledge from Serangan captains.",
     url: `${SITE_URL}/blog`,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bali Fishing Blog — Tips, Species & Seasonal Guides",
+    description:
+      "Bali fishing blog with species guides, seasonal tips, and local knowledge from Serangan captains.",
+  },
 };
 
 export default async function BlogPage() {

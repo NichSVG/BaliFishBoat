@@ -29,6 +29,7 @@ export interface TripPackage {
   pricingUnit: "per boat" | "per person";
   includes: string[];
   description: string;
+  _updatedAt?: string;
 }
 
 export interface Testimonial {

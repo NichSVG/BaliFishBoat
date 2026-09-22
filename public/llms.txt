@@ -23,22 +23,63 @@ Bali Fishing Trips operates private and shared fishing charters from Serangan Ha
 | Full Day | 8 hours | $750/boat | Private |
 | Full Day Jigging & Popping | 8 hours | $800/boat | Private |
 
-## Target Species
+## Fish Species in Bali
 
-- Mahi Mahi
-- Yellowfin Tuna
-- Skipjack Tuna
-- Red Snapper
-- Grouper
-- Mackerel
+| Species | Best Season | Difficulty | Eating Quality |
+|---------|-------------|------------|----------------|
+| Yellowfin Tuna | May – October | Intermediate | Excellent |
+| Mahi Mahi (Dolphinfish) | Year-round (peak Apr–Oct) | Beginner | Excellent |
+| Giant Trevally (GT) | May – October | Advanced | Good |
+| Skipjack Tuna | November – April | Beginner | Good |
+| Red Snapper | Year-round | Beginner | Excellent |
+| Grouper | Year-round | Beginner | Excellent |
+| Mackerel | Year-round | Beginner | Good |
+| Sailfish | June – September | Advanced | Catch and release |
+| Marlin | July – August | Advanced | Catch and release |
+| Spanish Mackerel | Year-round | Intermediate | Excellent |
+| Wahoo | May – October | Intermediate | Excellent |
+| Barracuda | Year-round | Intermediate | Good |
+| Coral Trout | Year-round | Beginner | Excellent |
 
 ## Fishing Techniques
 
-- Trolling
-- Bottom fishing
-- Jigging
-- Popping
-- Casting
+| Technique | Skill Level | Best For |
+|-----------|-------------|----------|
+| Trolling | Beginner | Tuna, Mahi Mahi, Sailfish, Marlin |
+| Jigging | Intermediate | Snapper, Grouper, GT, Tuna |
+| Slow Jigging | Intermediate | Snapper, Grouper, Deep species |
+| Popping | Advanced | GT, Tuna, Mahi Mahi |
+| Bottom Fishing | Beginner | Snapper, Grouper, Mackerel |
+| Casting | Beginner | Mahi Mahi, Mackerel, Tuna |
+| Live Bait Fishing | Intermediate | GT, Tuna, Sailfish |
+
+## Fishing Locations
+
+| Location | Distance from Serangan | Best Season | Water Depth |
+|----------|----------------------|-------------|-------------|
+| Serangan Harbor (departure) | 0 km | Year-round | — |
+| Nusa Penida | 30 min by boat | Apr – Oct | 30–80m |
+| Sanur Reef | 15 min by boat | Year-round | 10–30m |
+| Uluwatu | 45 min by car | May – Sep | 40–100m |
+| Nusa Lembongan | 30 min by boat | Apr – Oct | 20–60m |
+| Nusa Dua | 20 min by car | Year-round | 20–50m |
+
+## Seasonal Guide
+
+| Month | Season | Water Temp | What's Biting |
+|-------|--------|------------|---------------|
+| January | Wet | 28–30°C | Mahi Mahi, Skipjack, Mackerel, Snapper |
+| February | Wet | 28–30°C | Mahi Mahi, Skipjack, Mackerel, Snapper |
+| March | Wet | 28–30°C | Mahi Mahi, Skipjack, Red Snapper, Grouper |
+| April | Transition | 27–29°C | Yellowfin Tuna, Mahi Mahi, Red Snapper |
+| May | Dry | 26–28°C | Yellowfin Tuna, Mahi Mahi, GT, Red Snapper |
+| June | Dry | 25–27°C | Yellowfin Tuna, GT, Mahi Mahi, Sailfish |
+| July | Dry | 24–26°C | Yellowfin Tuna, GT, Mahi Mahi, Sailfish, Marlin |
+| August | Dry | 24–26°C | Yellowfin Tuna, GT, Mahi Mahi, Sailfish, Marlin |
+| September | Dry | 25–27°C | Yellowfin Tuna, GT, Mahi Mahi, Sailfish |
+| October | Transition | 26–28°C | Yellowfin Tuna, Mahi Mahi, GT, Red Snapper |
+| November | Wet | 27–29°C | Mahi Mahi, Skipjack, Red Snapper, Grouper |
+| December | Wet | 28–30°C | Mahi Mahi, Skipjack, Mackerel, Snapper |
 
 ## What's Included
 
@@ -69,6 +110,42 @@ Yes! Our Sharing Trip is a 4-hour shared boat experience at $200 per person. We 
 **Where do we depart from?**
 We depart from Serangan Harbor in Denpasar, Bali. We offer pickup from your hotel or villa.
 
+**Can beginners go fishing in Bali?**
+Absolutely. Our crew handles all the rigging and guides you through every step. Trolling and bottom fishing are great for beginners — you just hold the rod and enjoy the fight.
+
+**Can kids go fishing in Bali?**
+Yes! Kids love it. We recommend the Half-Day or Sharing Trip for families with children.
+
+**Is Bali good for tuna fishing?**
+Bali is excellent for tuna. Yellowfin Tuna are caught year-round off Serangan, with peak season from May to October.
+
+**What is the best month for fishing in Bali?**
+May through September is the best period — dry season, calm seas, and peak activity for Yellowfin Tuna, GT, Mahi Mahi, and even Marlin.
+
+**What fish bite in July in Bali?**
+July is peak season. Expect Yellowfin Tuna, Giant Trevally (GT), Mahi Mahi, Sailfish, and Marlin.
+
+**Can non-fishers join the trip?**
+Yes. The boat has shaded seating, a toilet, and comfortable cruising. Non-fishers can relax, snorkel, or just enjoy the ocean views.
+
+**How rough is the ocean in Bali?**
+During dry season (May–September), seas around Serangan are generally calm. Wet season can bring rougher conditions, but we monitor weather and offer free rescheduling if unsafe.
+
+**Can we cook the fish we catch?**
+On Full Day trips, the crew can prepare a fresh sashimi or grilled fish lunch from your catch.
+
+**Do I need a fishing license?**
+No — the fishing license is included in every trip.
+
+**What should I bring?**
+Sunscreen, hat, sunglasses, and a camera. We provide all fishing equipment. Wear comfortable clothing and non-slip shoes.
+
+## Crew
+
+- **Dedik** — Owner & Captain. Born and raised on Bali waters.
+- **Warsan** — Captain & Guide. Puts guests on Yellowfin Tuna.
+- **Lilong & Beton** — Deckhands. Rigging, jigging and keeping lines in the water.
+
 ## Contact
 
 - WhatsApp: Available via website for availability checks and bookings
@@ -77,7 +154,12 @@ We depart from Serangan Harbor in Denpasar, Bali. We offer pickup from your hote
 ## Pages
 
 - Home: https://balifishboat.com
+- About Us: https://balifishboat.com/about
 - Trip Packages: https://balifishboat.com/trips
+- Fish Species: https://balifishboat.com/species
+- Fishing Techniques: https://balifishboat.com/techniques
+- Fishing Locations: https://balifishboat.com/locations
+- Fishing Reports: https://balifishboat.com/fishing-reports
 - Gallery: https://balifishboat.com/gallery
 - Blog: https://balifishboat.com/blog
 - Contact: https://balifishboat.com/contact

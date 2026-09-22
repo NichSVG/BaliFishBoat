@@ -1,5 +1,14 @@
 import { client, freshClient } from "@/sanity/client";
-import type { Charter, TripPackage, Testimonial, ReviewThemes, BlogPost, BlogPostPreview } from "@/types/charter";
+import type {
+  Charter, TripPackage, Testimonial, ReviewThemes,
+  BlogPost, BlogPostPreview,
+} from "@/types/charter";
+import type {
+  Species, SpeciesPreview,
+  Technique, TechniquePreview,
+  FishingLocation, FishingLocationPreview,
+  FishingReport, FishingReportPreview,
+} from "@/types/content";
 
 // Trip Packages
 const tripPackagesQuery = `*[_type == "tripPackage"] | order(priceUsd asc){
@@ -109,4 +118,91 @@ export function getReviewThemes(): ReviewThemes {
     recommendedPct: 86,
     caughtFishPct: 73,
   };
+}
+
+// ─── Species ────────────────────────────────────────────────
+const speciesListQuery = `*[_type == "species"] | order(order asc){
+  name, slug, summary, bestSeason, difficulty,
+  image{ asset->{url}, alt }
+}`;
+
+const speciesBySlugQuery = `*[_type == "species" && slug.current == $slug][0]{
+  _id, name, slug, metaDescription, scientificName, summary, body,
+  bestSeason, whereFound, bestBait, techniques, averageSize, recordSize,
+  difficulty, eatingQuality, image{ asset->{url}, alt },
+  relatedSpecies[]->{ name, slug },
+  order
+}`;
+
+export async function getSpeciesList(): Promise<SpeciesPreview[]> {
+  return client.fetch(speciesListQuery);
+}
+
+export async function getSpeciesBySlug(slug: string): Promise<Species | null> {
+  return client.fetch(speciesBySlugQuery, { slug });
+}
+
+// ─── Techniques ─────────────────────────────────────────────
+const techniqueListQuery = `*[_type == "technique"] | order(order asc){
+  name, slug, summary, skillLevel, bestFor,
+  image{ asset->{url}, alt }
+}`;
+
+const techniqueBySlugQuery = `*[_type == "technique" && slug.current == $slug][0]{
+  _id, name, slug, metaDescription, summary, body,
+  bestFor, skillLevel, equipmentNeeded, bestSeason,
+  image{ asset->{url}, alt },
+  relatedSpecies[]->{ name, slug },
+  order
+}`;
+
+export async function getTechniqueList(): Promise<TechniquePreview[]> {
+  return client.fetch(techniqueListQuery);
+}
+
+export async function getTechniqueBySlug(slug: string): Promise<Technique | null> {
+  return client.fetch(techniqueBySlugQuery, { slug });
+}
+
+// ─── Locations ──────────────────────────────────────────────
+const locationListQuery = `*[_type == "fishingLocation"] | order(order asc){
+  name, slug, summary, region, bestSeason,
+  image{ asset->{url}, alt }
+}`;
+
+const locationBySlugQuery = `*[_type == "fishingLocation" && slug.current == $slug][0]{
+  _id, name, slug, metaDescription, summary, body,
+  region, distanceFromHarbor, bestSeason, waterDepth, boatAccess,
+  bestSpecies[]->{ name, slug },
+  image{ asset->{url}, alt },
+  mapUrl, order
+}`;
+
+export async function getLocationList(): Promise<FishingLocationPreview[]> {
+  return client.fetch(locationListQuery);
+}
+
+export async function getLocationBySlug(slug: string): Promise<FishingLocation | null> {
+  return client.fetch(locationBySlugQuery, { slug });
+}
+
+// ─── Fishing Reports ────────────────────────────────────────
+const fishingReportListQuery = `*[_type == "fishingReport" && status == "published"] | order(reportDate desc){
+  title, slug, reportDate, tripType, highlights,
+  catches[]{ species, count }
+}`;
+
+const fishingReportBySlugQuery = `*[_type == "fishingReport" && slug.current == $slug && status == "published"][0]{
+  _id, title, slug, metaDescription, reportDate, tripType, body,
+  catches[]{ species, count, weight, technique },
+  weather, waterConditions, waterTemp, guestCount, highlights,
+  photos[]{ asset->{url}, alt }
+}`;
+
+export async function getFishingReportList(): Promise<FishingReportPreview[]> {
+  return freshClient.fetch(fishingReportListQuery);
+}
+
+export async function getFishingReportBySlug(slug: string): Promise<FishingReport | null> {
+  return freshClient.fetch(fishingReportBySlugQuery, { slug });
 }

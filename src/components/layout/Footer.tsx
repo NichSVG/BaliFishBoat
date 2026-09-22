@@ -5,8 +5,13 @@ import { WHATSAPP_LINK, SITE_NAME } from "@/lib/constants";
 const exploreLinks = [
   { href: "/", label: "Home" },
   { href: "/trips", label: "Trip Packages" },
+  { href: "/species", label: "Fish Species" },
+  { href: "/techniques", label: "Fishing Techniques" },
+  { href: "/locations", label: "Fishing Locations" },
+  { href: "/fishing-reports", label: "Fishing Reports" },
   { href: "/gallery", label: "Gallery" },
   { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ];
 

@@ -12,6 +12,7 @@ import HomepagePics from "@/components/HomepagePics";
 import BoatSection from "@/components/BoatSection";
 import CrewSection from "@/components/CrewSection";
 import HowItWorks from "@/components/HowItWorks";
+import SeasonCalendar from "@/components/SeasonCalendar";
 import SectionHeader from "@/components/SectionHeader";
 import Reveal from "@/components/Reveal";
 import Link from "next/link";
@@ -252,6 +253,22 @@ export default async function HomePage() {
               </div>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* Season Calendar */}
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Reveal>
+            <SectionHeader
+              eyebrow="Seasons"
+              title="What's Biting This Month"
+              support="Interactive calendar — see what species and techniques work best every month."
+            />
+          </Reveal>
+          <Reveal>
+            <SeasonCalendar />
+          </Reveal>
         </div>
       </section>
 

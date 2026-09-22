@@ -1,9 +1,26 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { Resend } from "resend";
 import { writeClient } from "@/sanity/client";
-import { getNextTopic, generateBlogPost, parseBlogMarkdown } from "@/lib/blog-generator";
+import { getNextTopicWithAI, generateBlogPost, parseBlogMarkdown } from "@/lib/blog-generator";
 
 export const dynamic = "force-dynamic";
+
+// Best-effort email so a failed/skipped run doesn't go unnoticed for weeks.
+async function sendAlert(subject: string, text: string) {
+  if (!process.env.RESEND_API_KEY) return;
+  try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    await resend.emails.send({
+      from: "Bali Fishing Trips <noreply@balifishboat.com>",
+      to: ["dedikbali@yahoo.com"],
+      subject,
+      text,
+    });
+  } catch (err) {
+    console.error("[Blog Cron] Failed to send alert email:", err);
+  }
+}
 
 // Vercel Cron hits this endpoint on schedule
 export async function GET(req: Request) {
@@ -21,14 +38,22 @@ export async function GET(req: Request) {
     const existingTitles = existingPosts.map((p) => p.title);
     const existingSlugs = existingPosts.map((p) => p.slug);
 
-    // Pick the next topic that doesn't duplicate
-    const topic = getNextTopic(existingTitles);
+    // Pick the next topic. Uses the curated bank first, then falls back to
+    // AI-generated on-topic ideas once the bank is exhausted.
+    const topic = await getNextTopicWithAI(existingTitles);
     console.log(`[Blog Cron] Generating: "${topic.title}"`);
 
     // Double-check by title (in case AI changes it slightly, we also check slug later)
     const lowerExisting = existingTitles.map((t) => t.toLowerCase());
     if (lowerExisting.includes(topic.title.toLowerCase())) {
       console.log(`[Blog Cron] Topic already exists. Skipping.`);
+      // This means every topic in the bank has a post — the schedule would
+      // otherwise keep silently skipping forever.
+      await sendAlert(
+        "BaliFishBoat blog: topic bank exhausted",
+        `The blog cron ran but every topic in BLOG_TOPICS already has a post, so nothing was published.\n\n` +
+          `Add new topics to src/lib/blog-generator.ts (BLOG_TOPICS) to resume automatic publishing.`
+      );
       return NextResponse.json({ ok: true, skipped: true, reason: "duplicate topic" });
     }
 
@@ -83,10 +108,13 @@ export async function GET(req: Request) {
       status: "published",
     });
   } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
     console.error("[Blog Cron] Error:", err);
-    return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Unknown error" },
-      { status: 500 }
+    await sendAlert(
+      "BaliFishBoat blog: scheduled post FAILED",
+      `The scheduled blog post failed to publish.\n\nError:\n${message}\n\n` +
+        `Check the AI provider API key/quota (GROQ_API_KEY or OPENROUTER_API_KEY) and Vercel cron logs.`
     );
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

@@ -216,6 +216,192 @@ export const BLOG_TOPICS: BlogTopic[] = [
     secondaryKeywords: ["fishing charter Denpasar", "Serangan fishing charter", "Bali fishing trip"],
     angle: "Buyer's guide — what to look for, what to avoid, questions to ask",
   },
+  {
+    title: "Bali Fishing Charter Prices: What You Actually Pay For",
+    primaryKeyword: "Bali fishing charter",
+    secondaryKeywords: ["Bali fishing trip", "fishing charter Denpasar", "deep sea fishing Bali"],
+    angle: "Honest pricing breakdown, what's included, why prices vary — never invent numbers",
+  },
+  {
+    title: "Catch and Release in Bali: How We Handle the Fish We Catch",
+    primaryKeyword: "Bali fishing charter",
+    secondaryKeywords: ["Bali sport fishing", "deep sea fishing Bali", "Serangan fishing charter"],
+    angle: "Ethics and practice, when we keep vs release, sustainable fishing",
+  },
+  {
+    title: "What to Wear on a Bali Fishing Charter",
+    primaryKeyword: "Bali fishing trip",
+    secondaryKeywords: ["Bali fishing charter", "deep sea fishing Bali", "Serangan fishing charter"],
+    angle: "Sun protection, footwear, layers, what not to wear",
+  },
+  {
+    title: "Seasickness on a Bali Fishing Trip: How to Avoid It",
+    primaryKeyword: "Bali fishing trip",
+    secondaryKeywords: ["Bali fishing charter", "deep sea fishing Bali", "is fishing in Bali good for beginners"],
+    angle: "Practical prevention, medication timing, best conditions, reassurance",
+  },
+  {
+    title: "Bali Fishing in Wet Season vs Dry Season",
+    primaryKeyword: "Bali fishing season by month",
+    secondaryKeywords: ["best time to fish in Bali", "deep sea fishing Bali", "Bali fishing charter"],
+    angle: "Weather patterns, what bites when, sea conditions, crowds",
+  },
+  {
+    title: "Live Bait vs Lures in Bali: What We Use and When",
+    primaryKeyword: "Bali sport fishing",
+    secondaryKeywords: ["deep sea fishing Bali", "Bali fishing charter", "Yellowfin Tuna Bali"],
+    angle: "Technique comparison from a captain's perspective",
+  },
+  {
+    title: "Bottom Fishing in Bali: A Beginner's Guide",
+    primaryKeyword: "Bali fishing trip",
+    secondaryKeywords: ["South Bali fishing", "what fish can you catch in Bali", "Bali fishing charter"],
+    angle: "Reef and bottom techniques, species, who it suits",
+  },
+  {
+    title: "Jigging in Bali: Gear, Depth, and What You Catch",
+    primaryKeyword: "Bali sport fishing",
+    secondaryKeywords: ["deep sea fishing Bali", "Giant Trevally Bali", "Serangan fishing charter"],
+    angle: "Vertical jigging basics, depths, species like dogtooth and trevally",
+  },
+  {
+    title: "Popping for Giant Trevally in Bali",
+    primaryKeyword: "Giant Trevally Bali",
+    secondaryKeywords: ["Bali sport fishing", "deep sea fishing Bali", "Serangan fishing charter"],
+    angle: "Surface popping, explosive strikes, gear and spots",
+  },
+  {
+    title: "Trolling for Wahoo and Tuna Off Bali's Drop-Offs",
+    primaryKeyword: "Wahoo fishing Bali",
+    secondaryKeywords: ["Yellowfin Tuna Bali", "deep sea fishing Bali", "Bali fishing charter"],
+    angle: "Trolling spreads, speed, where the drop-off fires",
+  },
+  {
+    title: "Half Day vs Full Day Fishing in Bali: Which Trip Is Right for You?",
+    primaryKeyword: "Bali fishing trip",
+    secondaryKeywords: ["Bali fishing charter", "fishing charter Denpasar", "deep sea fishing Bali"],
+    angle: "Compare duration, cost, species, stamina, who suits each",
+  },
+  {
+    title: "Private vs Shared Fishing Charters in Bali",
+    primaryKeyword: "Bali fishing charter",
+    secondaryKeywords: ["Bali fishing trip", "Serangan fishing charter", "fishing charter Denpasar"],
+    angle: "Pros and cons, cost, privacy, flexibility",
+  },
+  {
+    title: "Solo Travelers: Is a Bali Fishing Charter Worth It?",
+    primaryKeyword: "Bali fishing trip",
+    secondaryKeywords: ["Bali fishing charter", "is fishing in Bali good for beginners", "South Bali fishing"],
+    angle: "Sharing trips, meeting people, cost-effective options",
+  },
+  {
+    title: "What's Included in a Bali Fishing Charter? A Full Breakdown",
+    primaryKeyword: "Bali fishing charter",
+    secondaryKeywords: ["Bali fishing trip", "fishing charter Denpasar", "deep sea fishing Bali"],
+    angle: "Gear, bait, crew, food, licenses, what's extra",
+  },
+  {
+    title: "Bali Fishing Charter vs Boat Tour: What's the Difference?",
+    primaryKeyword: "Bali fishing charter",
+    secondaryKeywords: ["Bali fishing trip", "deep sea fishing Bali", "South Bali fishing"],
+    angle: "Set expectations, why they're different experiences",
+  },
+  {
+    title: "Tides and Moon Phases: How They Affect Bali Fishing",
+    primaryKeyword: "best time to fish in Bali",
+    secondaryKeywords: ["Bali fishing season by month", "deep sea fishing Bali", "Bali fishing charter"],
+    angle: "Best tide windows, planning around the moon, local patterns",
+  },
+  {
+    title: "What Happens If You Don't Catch Anything in Bali?",
+    primaryKeyword: "Bali fishing charter",
+    secondaryKeywords: ["Bali fishing trip", "is fishing in Bali good for beginners", "deep sea fishing Bali"],
+    angle: "Honest expectations, no-catch policies, how we maximize odds",
+  },
+  {
+    title: "How to Book a Bali Fishing Charter: Step-by-Step",
+    primaryKeyword: "fishing charter Denpasar",
+    secondaryKeywords: ["Bali fishing charter", "Bali fishing trip", "Serangan fishing charter"],
+    angle: "Booking process, lead time, deposits, questions to ask",
+  },
+  {
+    title: "Beach and Shore Fishing in Bali: Spots and Species",
+    primaryKeyword: "South Bali fishing",
+    secondaryKeywords: ["what fish can you catch in Bali", "Bali fishing trip", "Bali fishing charter"],
+    angle: "Land-based options for travelers without a boat",
+  },
+  {
+    title: "Bali Fishing for Couples: A Day on the Water for Two",
+    primaryKeyword: "Bali fishing trip",
+    secondaryKeywords: ["Bali fishing charter", "Serangan fishing charter", "South Bali fishing"],
+    angle: "Romantic angle, comfort, scenery, mixed-ability couples",
+  },
+  {
+    title: "Group Fishing Charters in Bali: Stag Dos, Birthdays, and Team Days",
+    primaryKeyword: "Bali fishing charter",
+    secondaryKeywords: ["Bali fishing trip", "deep sea fishing Bali", "fishing charter Denpasar"],
+    angle: "Large groups, multiple boats, logistics, celebrations",
+  },
+  {
+    title: "Common Fish in Bali and How They Fight",
+    primaryKeyword: "what fish can you catch in Bali",
+    secondaryKeywords: ["Yellowfin Tuna Bali", "Giant Trevally Bali", "Mahi Mahi Bali fishing"],
+    angle: "Species-by-species fight characteristics and tackle",
+  },
+  {
+    title: "Fishing the Bali Strait: Currents, Tides, and Timing",
+    primaryKeyword: "South Bali fishing",
+    secondaryKeywords: ["deep sea fishing Bali", "Serangan fishing charter", "Bali fishing charter"],
+    angle: "Local waters, currents, best windows",
+  },
+  {
+    title: "Trolling Spreads Explained: How We Set Up in Bali",
+    primaryKeyword: "deep sea fishing Bali",
+    secondaryKeywords: ["Bali sport fishing", "Yellowfin Tuna Bali", "Wahoo fishing Bali"],
+    angle: "Rigging, lure positions, why the spread matters",
+  },
+  {
+    title: "Best Months for Marlin Fishing in Bali",
+    primaryKeyword: "Marlin fishing Bali",
+    secondaryKeywords: ["Bali fishing season by month", "Bali sport fishing", "deep sea fishing Bali"],
+    angle: "Seasonal timing, catch-and-release, realistic odds",
+  },
+  {
+    title: "Do You Need a Fishing License in Bali? Rules for Visitors",
+    primaryKeyword: "Bali fishing charter",
+    secondaryKeywords: ["Bali fishing trip", "fishing charter Denpasar", "deep sea fishing Bali"],
+    angle: "Recreational rules, what the operator handles, responsible practice",
+  },
+  {
+    title: "Cook Your Catch: Eating What You Catch in Bali",
+    primaryKeyword: "Bali fishing charter",
+    secondaryKeywords: ["Bali fishing trip", "what fish can you catch in Bali", "Serangan fishing charter"],
+    angle: "Local restaurants, cooking options, sustainability",
+  },
+  {
+    title: "Nusa Dua and Benoa Fishing: What to Expect",
+    primaryKeyword: "Benoa Harbour fishing",
+    secondaryKeywords: ["South Bali fishing", "Bali fishing charter", "fishing charter Denpasar"],
+    angle: "Compare nearby departure areas, resort-adjacent trips",
+  },
+  {
+    title: "Weather in Bali: How We Decide Whether to Fish",
+    primaryKeyword: "best time to fish in Bali",
+    secondaryKeywords: ["Bali fishing season by month", "Bali fishing charter", "deep sea fishing Bali"],
+    angle: "Wind, swell, rain, monsoon, go/no-go decisions",
+  },
+  {
+    title: "Fly Fishing in Bali? What's Realistic for Visiting Anglers",
+    primaryKeyword: "Bali sport fishing",
+    secondaryKeywords: ["Bali fishing trip", "South Bali fishing", "Serangan fishing charter"],
+    angle: "Honest take on fly fishing options on and around Bali",
+  },
+  {
+    title: "Boat Types Used for Bali Fishing Charters",
+    primaryKeyword: "Bali fishing charter",
+    secondaryKeywords: ["Serangan fishing charter", "deep sea fishing Bali", "fishing charter Denpasar"],
+    angle: "Hulls, engines, safety gear, capacity explained",
+  },
 ];
 
 export function getNextTopic(existingTitles?: string[]): BlogTopic {
@@ -257,8 +443,19 @@ export function buildUserPrompt(topic: BlogTopic): string {
   return parts.join("\n");
 }
 
-export async function generateBlogPost(topic: BlogTopic): Promise<string> {
-  // Support multiple env var names — picks whichever is set
+interface AIProvider {
+  apiKey: string;
+  provider: string;
+  isGroq: boolean;
+  isOpenRouter: boolean;
+  url: string;
+  models: string[];
+}
+
+// Resolves whichever AI provider/key is configured, plus the ordered list of
+// models to try. Multiple models are tried so a single retirement (like Groq
+// retiring llama-3.3-70b-versatile) can't silently stop the blog schedule.
+function resolveAIProvider(): AIProvider {
   const envNames = [
     "AI_API_KEY",
     "OPENROUTER_API_KEY",
@@ -276,7 +473,6 @@ export async function generateBlogPost(topic: BlogTopic): Promise<string> {
   }
   if (!apiKey) throw new Error(`No AI API key found. Set one of: ${envNames.join(", ")}`);
 
-  // Determine which API to call
   const isGroq = provider === "GROQ_API_KEY" || apiKey.startsWith("gsk_");
   const isOpenRouter = provider === "OPENROUTER_API_KEY" || apiKey.startsWith("sk-or-");
 
@@ -286,11 +482,23 @@ export async function generateBlogPost(topic: BlogTopic): Promise<string> {
       ? "https://openrouter.ai/api/v1/chat/completions"
       : process.env.AI_API_URL || "https://api.groq.com/openai/v1/chat/completions";
 
-  const model = isGroq
-    ? "llama-3.3-70b-versatile"
+  const models = isGroq
+    ? ["openai/gpt-oss-120b", "openai/gpt-oss-20b"]
     : isOpenRouter
-      ? "anthropic/claude-sonnet-4"
-      : process.env.AI_MODEL || "llama-3.3-70b-versatile";
+      ? ["anthropic/claude-sonnet-4", "openai/gpt-oss-120b"]
+      : [process.env.AI_MODEL || "openai/gpt-oss-120b"];
+
+  return { apiKey, provider, isGroq, isOpenRouter, url, models };
+}
+
+async function callAIChat(opts: {
+  system: string;
+  user: string;
+  maxTokens?: number;
+  temperature?: number;
+  json?: boolean;
+}): Promise<string> {
+  const { apiKey, provider, isGroq, isOpenRouter, url, models } = resolveAIProvider();
 
   const headers: Record<string, string> = {
     Authorization: `Bearer ${apiKey}`,
@@ -301,27 +509,167 @@ export async function generateBlogPost(topic: BlogTopic): Promise<string> {
     headers["X-Title"] = "BaliFishBoat Blog Generator";
   }
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify({
+  let lastError = "";
+
+  for (const model of models) {
+    const payload: Record<string, unknown> = {
       model,
       messages: [
-        { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: buildUserPrompt(topic) },
+        { role: "system", content: opts.system },
+        { role: "user", content: opts.user },
       ],
-      max_tokens: 4096,
-      temperature: 0.7,
-    }),
-  });
+      max_tokens: opts.maxTokens ?? 8192,
+      temperature: opts.temperature ?? 0.7,
+    };
 
-  if (!response.ok) {
-    const err = await response.text();
-    throw new Error(`AI API error (${provider}): ${response.status} — ${err}`);
+    if (opts.json) {
+      payload.response_format = { type: "json_object" };
+    }
+
+    // gpt-oss models are reasoning models; keep reasoning cheap so it doesn't
+    // consume the whole output token budget and return an empty body.
+    if (isGroq && model.startsWith("openai/gpt-oss")) {
+      payload.reasoning_effort = "low";
+    }
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const err = await response.text();
+      lastError = `AI API error (${provider}, ${model}): ${response.status} — ${err}`;
+      console.error(`[blog-generator] ${lastError}`);
+      // Retired model, rate limit, or upstream failure — try the next model.
+      if (response.status === 404 || response.status === 429 || response.status >= 500) {
+        continue;
+      }
+      throw new Error(lastError);
+    }
+
+    const data = await response.json();
+    const content: string = data.choices?.[0]?.message?.content ?? "";
+    if (content.trim()) return content;
+
+    lastError = `AI API returned empty content (${provider}, ${model})`;
+    console.error(`[blog-generator] ${lastError}`);
   }
 
-  const data = await response.json();
-  return data.choices?.[0]?.message?.content ?? "";
+  throw new Error(`All AI models failed. Last error: ${lastError}`);
+}
+
+export async function generateBlogPost(topic: BlogTopic): Promise<string> {
+  return callAIChat({
+    system: SYSTEM_PROMPT,
+    user: buildUserPrompt(topic),
+    maxTokens: 8192,
+    temperature: 0.7,
+  });
+}
+
+const KEYWORD_BANK = `Core: Bali fishing charter, deep sea fishing Bali, Bali fishing trip, Serangan fishing charter, Bali sport fishing, fishing charter Denpasar
+Species: Mahi Mahi Bali fishing, Giant Trevally Bali, Yellowfin Tuna Bali, Marlin fishing Bali, Wahoo fishing Bali
+Location: Benoa Harbour fishing, Nusa Penida fishing charter, South Bali fishing, Serangan Denpasar boat charter
+Informational / long-tail: best time to fish in Bali, what fish can you catch in Bali, Bali fishing season by month, traditional Balinese fishing boat jukung, is fishing in Bali good for beginners`;
+
+const TOPIC_SCOUT_PROMPT = `You are an SEO content strategist for BaliFishBoat, a fishing charter business departing from Serangan, Denpasar, South Bali (deep-sea and inshore charters: trolling, bottom fishing, jigging, popping).
+
+Your job: propose NEW blog topics that English-speaking travelers actually search for when researching Bali fishing charters.
+
+HARD RULES
+- Every topic must be directly relevant to Bali fishing charters, the species caught there, seasons, techniques, departure points, or booking.
+- Never propose anything off-topic (no general Bali travel, no unrelated destinations).
+- Never repeat or closely overlap the existing titles you are given.
+- Never invent prices, statistics, or reviews.
+- Return strict JSON only, no markdown, no commentary.
+
+Return this exact shape:
+{"topics":[{"title":"...","primaryKeyword":"...","secondaryKeywords":["...","..."],"angle":"..."}]}`;
+
+function parseTopicIdeas(raw: string): BlogTopic[] {
+  let text = raw.trim();
+  // Strip code fences if the model added them
+  text = text.replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
+  const start = text.indexOf("{");
+  const end = text.lastIndexOf("}");
+  if (start === -1 || end === -1) return [];
+
+  try {
+    const data = JSON.parse(text.slice(start, end + 1));
+    const topics = Array.isArray(data?.topics) ? data.topics : [];
+    return topics
+      .filter(
+        (t: unknown): t is BlogTopic =>
+          !!t &&
+          typeof (t as BlogTopic).title === "string" &&
+          typeof (t as BlogTopic).primaryKeyword === "string"
+      )
+      .map((t: BlogTopic) => ({
+        title: t.title.trim(),
+        primaryKeyword: t.primaryKeyword.trim(),
+        secondaryKeywords: Array.isArray(t.secondaryKeywords)
+          ? t.secondaryKeywords.filter((k) => typeof k === "string")
+          : [],
+        angle: typeof t.angle === "string" ? t.angle.trim() : undefined,
+      }));
+  } catch {
+    return [];
+  }
+}
+
+export async function generateTopicIdeas(
+  existingTitles: string[],
+  count = 6
+): Promise<BlogTopic[]> {
+  const user = [
+    "Existing published post titles (do NOT repeat or closely overlap these):",
+    existingTitles.length ? existingTitles.map((t) => `- ${t}`).join("\n") : "(none yet)",
+    "",
+    "Keyword bank to draw from (pick the best fit for each topic):",
+    KEYWORD_BANK,
+    "",
+    `Propose ${count} NEW blog topics a traveler researching Bali fishing would realistically search for.`,
+    `Return strict JSON only: {"topics":[{"title":"...","primaryKeyword":"...","secondaryKeywords":["...","..."],"angle":"..."}]}`,
+  ].join("\n");
+
+  const raw = await callAIChat({
+    system: TOPIC_SCOUT_PROMPT,
+    user,
+    maxTokens: 2048,
+    temperature: 0.9,
+    json: true,
+  });
+
+  return parseTopicIdeas(raw);
+}
+
+// Picks the next topic. Uses the curated bank first, and once it is exhausted
+// asks the AI to invent fresh on-topic ideas from the keyword bank so the
+// schedule can keep running indefinitely without repeating posts.
+export async function getNextTopicWithAI(existingTitles: string[] = []): Promise<BlogTopic> {
+  const lowerTitles = existingTitles.map((t) => t.toLowerCase());
+  const available = BLOG_TOPICS.filter(
+    (t) => !lowerTitles.includes(t.title.toLowerCase())
+  );
+
+  if (available.length > 0) {
+    return getNextTopic(existingTitles);
+  }
+
+  try {
+    const ideas = await generateTopicIdeas(existingTitles);
+    const fresh = ideas.find((t) => !lowerTitles.includes(t.title.toLowerCase()));
+    if (fresh) return fresh;
+    console.error("[blog-generator] AI returned no usable new topics");
+  } catch (err) {
+    console.error("[blog-generator] AI topic generation failed:", err);
+  }
+
+  // Fallback: this may return an already-used topic, which the cron route
+  // detects and reports as an exhausted/needs-attention state.
+  return getNextTopic(existingTitles);
 }
 
 export function parseBlogMarkdown(raw: string): {

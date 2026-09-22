@@ -36,6 +36,14 @@ export const blogPost = defineType({
       of: [{ type: "string" }],
     }),
     defineField({
+      name: "topicKey",
+      title: "Topic Key (automation)",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+      description: "Normalised topic identifier used to prevent duplicate scheduled posts.",
+    }),
+    defineField({
       name: "publishedAt",
       title: "Published At",
       type: "datetime",

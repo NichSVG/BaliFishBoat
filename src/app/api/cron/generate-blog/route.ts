@@ -2,7 +2,12 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 import { writeClient } from "@/sanity/client";
-import { getNextTopicWithAI, generateBlogPost, parseBlogMarkdown } from "@/lib/blog-generator";
+import {
+  getNextTopicWithAI,
+  generateBlogPost,
+  parseBlogMarkdown,
+  normalizeTitle,
+} from "@/lib/blog-generator";
 
 export const dynamic = "force-dynamic";
 
@@ -31,21 +36,23 @@ export async function GET(req: Request) {
   }
 
   try {
-    // Fetch all existing blog post titles to avoid duplicates
-    const existingPosts: { title: string; slug: string }[] = await writeClient.fetch(
-      `*[_type == "blogPost"]{ title, "slug": slug.current }`
-    );
+    // Fetch all existing blog post titles/keys to avoid duplicates
+    const existingPosts: { title: string; slug: string; topicKey?: string }[] =
+      await writeClient.fetch(
+        `*[_type == "blogPost"]{ title, "slug": slug.current, topicKey }`
+      );
     const existingTitles = existingPosts.map((p) => p.title);
     const existingSlugs = existingPosts.map((p) => p.slug);
+    const existingKeys = existingPosts.map((p) => p.topicKey).filter((k): k is string => !!k);
 
     // Pick the next topic. Uses the curated bank first, then falls back to
     // AI-generated on-topic ideas once the bank is exhausted.
-    const topic = await getNextTopicWithAI(existingTitles);
+    const topic = await getNextTopicWithAI(existingTitles, existingKeys);
     console.log(`[Blog Cron] Generating: "${topic.title}"`);
 
-    // Double-check by title (in case AI changes it slightly, we also check slug later)
-    const lowerExisting = existingTitles.map((t) => t.toLowerCase());
-    if (lowerExisting.includes(topic.title.toLowerCase())) {
+    // Double-check by stable topic key, normalised so AI rewording still matches
+    const usedKeys = new Set([...existingTitles, ...existingKeys].map(normalizeTitle));
+    if (usedKeys.has(normalizeTitle(topic.title))) {
       console.log(`[Blog Cron] Topic already exists. Skipping.`);
       // This means every topic in the bank has a post — the schedule would
       // otherwise keep silently skipping forever.
@@ -86,6 +93,7 @@ export async function GET(req: Request) {
       metaDescription,
       primaryKeyword: topic.primaryKeyword,
       secondaryKeywords: topic.secondaryKeywords,
+      topicKey: normalizeTitle(topic.title),
       publishedAt: new Date().toISOString(),
       body,
       internalLinks,

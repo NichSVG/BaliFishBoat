@@ -404,12 +404,25 @@ export const BLOG_TOPICS: BlogTopic[] = [
   },
 ];
 
-export function getNextTopic(existingTitles?: string[]): BlogTopic {
-  // If we have existing titles, skip topics that already have posts
-  if (existingTitles && existingTitles.length > 0) {
-    const lowerTitles = existingTitles.map((t) => t.toLowerCase());
+// Normalises a title for duplicate comparison — ignores case, punctuation and
+// curly quotes. The AI often rewrites the H1 slightly (e.g. "What's" vs
+// "What’s"), so exact matching would let a topic be re-selected forever and
+// silently skip as a duplicate slug.
+export function normalizeTitle(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+export function getNextTopic(existingTitles?: string[], existingKeys: string[] = []): BlogTopic {
+  // existingKeys are stable identifiers (normalised topic titles) stored on
+  // posts, so dedup still works when the AI rewrites the published H1.
+  const usedKeys = new Set(existingKeys.map(normalizeTitle));
+  if ((existingTitles && existingTitles.length > 0) || usedKeys.size > 0) {
+    const usedTitles = new Set((existingTitles ?? []).map(normalizeTitle));
     const available = BLOG_TOPICS.filter(
-      (t) => !lowerTitles.includes(t.title.toLowerCase())
+      (t) => !usedKeys.has(normalizeTitle(t.title)) && !usedTitles.has(normalizeTitle(t.title))
     );
     if (available.length > 0) {
       // Pick based on date for deterministic but varied selection
@@ -532,18 +545,34 @@ async function callAIChat(opts: {
       payload.reasoning_effort = "low";
     }
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(payload),
-    });
+    // Free tiers enforce a low tokens-per-minute limit, so a burst of requests
+    // can 429. Back off and retry the same model before falling through.
+    let response: Response | undefined;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      response = await fetch(url, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(payload),
+      });
 
-    if (!response.ok) {
-      const err = await response.text();
-      lastError = `AI API error (${provider}, ${model}): ${response.status} — ${err}`;
+      if (response.status === 429 && attempt < 2) {
+        const waitMs = 20000 * (attempt + 1);
+        console.warn(
+          `[blog-generator] Rate limited (${model}); waiting ${waitMs / 1000}s before retry ${attempt + 2}/3`
+        );
+        await new Promise((r) => setTimeout(r, waitMs));
+        continue;
+      }
+      break;
+    }
+
+    if (!response || !response.ok) {
+      const err = response ? await response.text() : "no response";
+      const status = response?.status ?? 0;
+      lastError = `AI API error (${provider}, ${model}): ${status} — ${err}`;
       console.error(`[blog-generator] ${lastError}`);
       // Retired model, rate limit, or upstream failure — try the next model.
-      if (response.status === 404 || response.status === 429 || response.status >= 500) {
+      if (status === 404 || status === 429 || status >= 500) {
         continue;
       }
       throw new Error(lastError);
@@ -648,19 +677,23 @@ export async function generateTopicIdeas(
 // Picks the next topic. Uses the curated bank first, and once it is exhausted
 // asks the AI to invent fresh on-topic ideas from the keyword bank so the
 // schedule can keep running indefinitely without repeating posts.
-export async function getNextTopicWithAI(existingTitles: string[] = []): Promise<BlogTopic> {
-  const lowerTitles = existingTitles.map((t) => t.toLowerCase());
-  const available = BLOG_TOPICS.filter(
-    (t) => !lowerTitles.includes(t.title.toLowerCase())
-  );
+export async function getNextTopicWithAI(
+  existingTitles: string[] = [],
+  existingKeys: string[] = []
+): Promise<BlogTopic> {
+  const used = new Set([
+    ...existingTitles.map(normalizeTitle),
+    ...existingKeys.map(normalizeTitle),
+  ]);
+  const available = BLOG_TOPICS.filter((t) => !used.has(normalizeTitle(t.title)));
 
   if (available.length > 0) {
-    return getNextTopic(existingTitles);
+    return getNextTopic(existingTitles, existingKeys);
   }
 
   try {
-    const ideas = await generateTopicIdeas(existingTitles);
-    const fresh = ideas.find((t) => !lowerTitles.includes(t.title.toLowerCase()));
+    const ideas = await generateTopicIdeas([...existingTitles, ...existingKeys]);
+    const fresh = ideas.find((t) => !used.has(normalizeTitle(t.title)));
     if (fresh) return fresh;
     console.error("[blog-generator] AI returned no usable new topics");
   } catch (err) {
@@ -669,7 +702,7 @@ export async function getNextTopicWithAI(existingTitles: string[] = []): Promise
 
   // Fallback: this may return an already-used topic, which the cron route
   // detects and reports as an exhausted/needs-attention state.
-  return getNextTopic(existingTitles);
+  return getNextTopic(existingTitles, existingKeys);
 }
 
 export function parseBlogMarkdown(raw: string): {
